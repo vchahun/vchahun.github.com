@@ -15,8 +15,8 @@ nav {
     display: none;
 }
 
-#resume #email {
-    display: inline;
+#printinfo {
+    display: block;
 }
 
 p {

@@ -87,7 +87,7 @@ nav a {
 
 /* Resume */
 
-#resume #email {
+#printinfo {
     float: right;
     display: none; /* for print */
 }
