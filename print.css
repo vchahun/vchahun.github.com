@@ -1,0 +1,24 @@
+body {
+	background: white;
+    color: black;
+}
+
+a {
+	color: #444;
+}
+
+span.courses {
+	display: none
+}
+
+nav {
+    display: none;
+}
+
+#resume #email {
+    display: inline;
+}
+
+p {
+    margin-top: 0.5em;
+}

@@ -1,0 +1,123 @@
+body {
+    background: #f3f3f3;
+    font: normal 100% "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+    margin: 0;
+    color: #555;
+}
+
+a {
+    color: #c41;
+    text-decoration: none;
+}
+
+h3 {
+    margin: 0;
+}
+
+.content {
+    width: 920px;
+    padding: 20px;
+    margin: 20px auto;
+    background: white;
+    position:  relative;
+}
+
+#id {
+    width: 300px;
+    margin-right: 20px;
+    display: inline-block;
+}
+
+#photo {
+    margin-bottom: 20px;
+}
+
+h1 {
+    font: 230% Georgia, serif;
+    display: inline-block;
+    margin: 0;
+    text-shadow: white 0px 1px 0, #555 0 -1px 0
+}
+
+#home h2 {
+    width: 300px;
+    vertical-align: bottom;
+    font-size: 120%;
+    font-weight: normal;
+    margin: 0;
+    display: inline-block;
+}
+
+nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+nav ul, nav li {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+nav a {
+    color: #28D;
+}
+
+#research {
+    position: absolute;
+    top: 20px;
+    left: 340px;
+}
+
+#research li {
+    list-style-type: none;
+}
+
+#research ul {
+    padding: 0;
+}
+
+#home #email {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font: 90% Monaco, Consolas, monospace;
+}
+
+/* Resume */
+
+#resume #email {
+    float: right;
+    display: none; /* for print */
+}
+
+#resume h2 {
+    clear: both
+}
+
+#resume h3 {
+	display: inline-block;
+	width: 200px;
+    font-size: 100%;
+}
+
+#resume ul {
+	padding: 0
+}
+
+#resume li {
+	list-style-type: none;
+}
+
+span.location {
+	font-style: italic;
+}
+
+p.description {
+	padding-left: 200px;
+}
+
+span.courses {
+	font-size: 70%;
+}
