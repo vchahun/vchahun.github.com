@@ -140,3 +140,29 @@ span.courses {
         padding-top: 10px;
     }
 }
+
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: #444;
+    }
+    nav {
+        display: none;
+    }
+
+    #printinfo {
+        display: block;
+    }
+
+    span.courses {
+        display: none
+    }
+
+    #resume p {
+        margin-top: 0.5em;
+    }
+}
