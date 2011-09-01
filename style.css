@@ -29,6 +29,8 @@ div.content {
 }
 
 #photo {
+    width: 300px;
+    height: 300px;
     margin-bottom: 20px;
 }
 
