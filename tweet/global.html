@@ -5,12 +5,9 @@
         <title>French presidential election results on Twitter</title>
         <script src="http://dygraphs.com/dygraph-combined.js"></script>
         <script>
-            var fh = 'rgb(200, 0, 40)', fh2 = 'rgb(250, 0, 40)';
-            var ns = 'rgb(0, 80, 130)', ns2 = 'rgb(0, 80, 180)';
             window.onload = function() {
-                new Dygraph(document.getElementById("graph"), '/tweet/track.csv',
-                        {'showRoller': true, 'rollPeriod': 60,
-                        'colors': [ns2, fh2, ns, fh]});
+                new Dygraph(document.getElementById("graph"), '/tweet/global.csv',
+                        {'showRoller': true, 'rollPeriod': 10});
             }
         </script>
         <style>
@@ -20,7 +17,7 @@
         </style>
     </head>
     <body>
-        <h1>#ns2012, #fh2012, #sarkozy, #hollande (tweets/min)</h1>
+        <h1>#radiolondres (tweets/min)</h1>
         <div id="graph" style="height:600px; width:1200px"></div>
         <p>Numbers are smoothed with a rolling average (set bandwidth in minutes using the small box in the lower left corner)</p>
     </body>
