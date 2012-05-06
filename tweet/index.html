@@ -7,7 +7,7 @@
         <script>
             window.onload = function() {
                 new Dygraph(document.getElementById("graph"), '/tweet/track.csv',
-                        {'showRoller': true});
+                        {'showRoller': true, 'rollPeriod': 50});
             }
         </script>
     </head>
