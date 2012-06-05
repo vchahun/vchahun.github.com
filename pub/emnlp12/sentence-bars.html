@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf8">
+<style> 
+    body {
+        font:7pt Monaco, Consolas, monospace;
+    }
+    div.up, div.down {
+        padding:0 3px;
+    }
+    div.bars {
+        display:inline-block;
+        position:relative;
+        color: transparent;
+    }
+    span.bar {
+        display:inline-block;
+        width:50%;
+        position:absolute;
+    }
+    div.bars span.bar:nth-child(1) {
+        background: #4E3F2A; /* #348ABD */
+    }
+    div.bars span.bar:nth-child(2) {
+        left:50%;
+        background: #EEA018; /* #734789 */
+    }
+    div.up div.bars {
+        vertical-align:bottom;
+    }
+    div.down div.bars {
+        vertical-align:top;
+    }
+    div.up span.bar {
+        bottom:0;
+    }
+    div.down span.bar {
+        top:0;
+    }
+    div.sentence {
+        width: 100%;
+        margin: 0px;
+        padding: 2px;
+        border: 1px solid #bbb;
+        border-width: 1px 0;
+    }
+</style>
+</head>
+<body>
+<div class="up">
+<div style="height:4.3860677642em" class="bars">
+<span style="height:4.2798194242em" title="Sentiment:
+3gram:* * great:0.000000
+2gram:* great:0.000000
+1gram:great:4.179819
+2gram:great dark:-0.000000
+3gram:great dark ,:0.000000
+3gram:* great dark:0.000000" class="bar"></span>
+<span style="height:4.3860677642em" title="Price range:
+3gram:* * great:0.000000
+2gram:* great:0.000000
+1gram:great:4.285574
+2gram:great dark:0.000494
+3gram:great dark ,:0.000000
+3gram:* great dark:0.000000" class="bar"></span>
+<span>great</span>
+</div>
+
+<div style="height:1.68704212999em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:* great dark:0.000000
+2gram:great dark:-0.000000
+1gram:dark:-0.584567
+2gram:dark ,:0.000000
+3gram:dark , sexy:-0.000000
+3gram:great dark ,:0.000000" class="bar"></span>
+<span style="height:1.68704212999em" title="Price range:
+3gram:* great dark:0.000000
+2gram:great dark:0.000494
+1gram:dark:1.588610
+2gram:dark ,:0.000000
+3gram:dark , sexy:-0.002061
+3gram:great dark ,:0.000000" class="bar"></span>
+<span>dark</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:great dark ,:0.000000
+2gram:dark ,:0.000000
+1gram:,:0.000000
+2gram:, sexy:0.000000
+3gram:, sexy atmosphere:0.000000
+3gram:dark , sexy:-0.000000" class="bar"></span>
+<span style="height:0.0979386972736em" title="Price range:
+3gram:great dark ,:0.000000
+2gram:dark ,:0.000000
+1gram:,:0.000000
+2gram:, sexy:0.000000
+3gram:, sexy atmosphere:0.000000
+3gram:dark , sexy:-0.002061" class="bar"></span>
+<span>,</span>
+</div>
+
+<div style="height:4.84201211826em" class="bars">
+<span style="height:4.84201211826em" title="Sentiment:
+3gram:dark , sexy:-0.000000
+2gram:, sexy:0.000000
+1gram:sexy:4.742012
+2gram:sexy atmosphere:-0.000000
+3gram:sexy atmosphere .:0.000000
+3gram:, sexy atmosphere:0.000000" class="bar"></span>
+<span style="height:0.0856117505158em" title="Price range:
+3gram:dark , sexy:-0.002061
+2gram:, sexy:0.000000
+1gram:sexy:-0.012759
+2gram:sexy atmosphere:0.000432
+3gram:sexy atmosphere .:0.000000
+3gram:, sexy atmosphere:0.000000" class="bar"></span>
+<span>sexy</span>
+</div>
+
+<div style="height:12.4610982214em" class="bars">
+<span style="height:1.14488259212em" title="Sentiment:
+3gram:, sexy atmosphere:0.000000
+2gram:sexy atmosphere:-0.000000
+1gram:atmosphere:1.044883
+2gram:atmosphere .:0.000000
+3gram:atmosphere . good:0.000000
+3gram:sexy atmosphere .:0.000000" class="bar"></span>
+<span style="height:12.4610982214em" title="Price range:
+3gram:, sexy atmosphere:0.000000
+2gram:sexy atmosphere:0.000432
+1gram:atmosphere:12.360666
+2gram:atmosphere .:0.000000
+3gram:atmosphere . good:0.000000
+3gram:sexy atmosphere .:0.000000" class="bar"></span>
+<span>atmosphere</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:sexy atmosphere .:0.000000
+2gram:atmosphere .:0.000000
+1gram:.:0.000000
+2gram:. good:0.000000
+3gram:. good service:0.000000
+3gram:atmosphere . good:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:sexy atmosphere .:0.000000
+2gram:atmosphere .:0.000000
+1gram:.:0.000000
+2gram:. good:0.000000
+3gram:. good service:0.000000
+3gram:atmosphere . good:0.000000" class="bar"></span>
+<span>.</span>
+</div>
+
+<div style="height:8.61683496773em" class="bars">
+<span style="height:2.50913454649em" title="Sentiment:
+3gram:atmosphere . good:0.000000
+2gram:. good:0.000000
+1gram:good:0.370072
+2gram:good service:2.039063
+3gram:good service .:0.000000
+3gram:. good service:0.000000" class="bar"></span>
+<span style="height:8.61683496773em" title="Price range:
+3gram:atmosphere . good:0.000000
+2gram:. good:0.000000
+1gram:good:7.967818
+2gram:good service:0.549017
+3gram:good service .:0.000000
+3gram:. good service:0.000000" class="bar"></span>
+<span>good</span>
+</div>
+
+<div style="height:15.7826567913em" class="bars">
+<span style="height:0.985549456785em" title="Sentiment:
+3gram:. good service:0.000000
+2gram:good service:2.039063
+1gram:service:-1.153513
+2gram:service .:0.000000
+3gram:service . nice:0.000000
+3gram:good service .:0.000000" class="bar"></span>
+<span style="height:15.7826567913em" title="Price range:
+3gram:. good service:0.000000
+2gram:good service:0.549017
+1gram:service:15.133639
+2gram:service .:0.000000
+3gram:service . nice:0.000000
+3gram:good service .:0.000000" class="bar"></span>
+<span>service</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:good service .:0.000000
+2gram:service .:0.000000
+1gram:.:0.000000
+2gram:. nice:0.000000
+3gram:. nice variety:0.000000
+3gram:service . nice:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:good service .:0.000000
+2gram:service .:0.000000
+1gram:.:0.000000
+2gram:. nice:0.000000
+3gram:. nice variety:0.000000
+3gram:service . nice:0.000000" class="bar"></span>
+<span>.</span>
+</div>
+
+<div style="height:6.39600710764em" class="bars">
+<span style="height:1.61306240005em" title="Sentiment:
+3gram:service . nice:0.000000
+2gram:. nice:0.000000
+1gram:nice:0.202350
+2gram:nice variety:1.310713
+3gram:nice variety of:0.000000
+3gram:. nice variety:0.000000" class="bar"></span>
+<span style="height:6.39600710764em" title="Price range:
+3gram:service . nice:0.000000
+2gram:. nice:0.000000
+1gram:nice:6.412159
+2gram:nice variety:-0.116152
+3gram:nice variety of:0.000000
+3gram:. nice variety:0.000000" class="bar"></span>
+<span>nice</span>
+</div>
+
+<div style="height:0.189387382051em" class="bars">
+<span style="height:0.189387382051em" title="Sentiment:
+3gram:. nice variety:0.000000
+2gram:nice variety:1.310713
+1gram:variety:0.407087
+2gram:variety of:0.000000
+3gram:variety of tasty:-1.628412
+3gram:nice variety of:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:. nice variety:0.000000
+2gram:nice variety:-0.116152
+1gram:variety:-1.011928
+2gram:variety of:0.000000
+3gram:variety of tasty:0.006857
+3gram:nice variety of:0.000000" class="bar"></span>
+<span>variety</span>
+</div>
+
+<div style="height:0.106857249129em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:nice variety of:0.000000
+2gram:variety of:0.000000
+1gram:of:0.000000
+2gram:of tasty:0.000000
+3gram:of tasty cocktails:0.000000
+3gram:variety of tasty:-1.628412" class="bar"></span>
+<span style="height:0.106857249129em" title="Price range:
+3gram:nice variety of:0.000000
+2gram:variety of:0.000000
+1gram:of:0.000000
+2gram:of tasty:0.000000
+3gram:of tasty cocktails:0.000000
+3gram:variety of tasty:0.006857" class="bar"></span>
+<span>of</span>
+</div>
+
+<div style="height:1.13259771715em" class="bars">
+<span style="height:1.13259771715em" title="Sentiment:
+3gram:variety of tasty:-1.628412
+2gram:of tasty:0.000000
+1gram:tasty:2.086549
+2gram:tasty cocktails:0.574460
+3gram:tasty cocktails .:0.000000
+3gram:of tasty cocktails:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:variety of tasty:0.006857
+2gram:of tasty:0.000000
+1gram:tasty:-1.330161
+2gram:tasty cocktails:0.000965
+3gram:tasty cocktails .:0.000000
+3gram:of tasty cocktails:0.000000" class="bar"></span>
+<span>tasty</span>
+</div>
+
+<div style="height:0.192501609045em" class="bars">
+<span style="height:0.192501609045em" title="Sentiment:
+3gram:of tasty cocktails:0.000000
+2gram:tasty cocktails:0.574460
+1gram:cocktails:-0.481959
+2gram:cocktails .:0.000000
+3gram:cocktails . sushi:0.000000
+3gram:tasty cocktails .:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:of tasty cocktails:0.000000
+2gram:tasty cocktails:0.000965
+1gram:cocktails:-0.263341
+2gram:cocktails .:0.000000
+3gram:cocktails . sushi:0.000000
+3gram:tasty cocktails .:0.000000" class="bar"></span>
+<span>cocktails</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:tasty cocktails .:0.000000
+2gram:cocktails .:0.000000
+1gram:.:0.000000
+2gram:. sushi:0.000000
+3gram:. sushi tasted:0.000000
+3gram:cocktails . sushi:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:tasty cocktails .:0.000000
+2gram:cocktails .:0.000000
+1gram:.:0.000000
+2gram:. sushi:0.000000
+3gram:. sushi tasted:0.000000
+3gram:cocktails . sushi:0.000000" class="bar"></span>
+<span>.</span>
+</div>
+
+<div style="height:12.9660250375em" class="bars">
+<span style="height:0.268943719246em" title="Sentiment:
+3gram:cocktails . sushi:0.000000
+2gram:. sushi:0.000000
+1gram:sushi:0.168944
+2gram:sushi tasted:-0.000000
+3gram:sushi tasted good:-0.000000
+3gram:. sushi tasted:0.000000" class="bar"></span>
+<span style="height:12.9660250375em" title="Price range:
+3gram:cocktails . sushi:0.000000
+2gram:. sushi:0.000000
+1gram:sushi:12.931068
+2gram:sushi tasted:-0.065043
+3gram:sushi tasted good:0.000000
+3gram:. sushi tasted:0.000000" class="bar"></span>
+<span>sushi</span>
+</div>
+
+<div style="height:0.525830716518em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:. sushi tasted:0.000000
+2gram:sushi tasted:-0.000000
+1gram:tasted:-2.128606
+2gram:tasted good:0.669755
+3gram:tasted good ,:0.000000
+3gram:sushi tasted good:-0.000000" class="bar"></span>
+<span style="height:0.525830716518em" title="Price range:
+3gram:. sushi tasted:0.000000
+2gram:sushi tasted:-0.065043
+1gram:tasted:1.173520
+2gram:tasted good:-0.682646
+3gram:tasted good ,:0.000000
+3gram:sushi tasted good:0.000000" class="bar"></span>
+<span>tasted</span>
+</div>
+
+<div style="height:7.24118208808em" class="bars">
+<span style="height:4.44151952299em" title="Sentiment:
+3gram:sushi tasted good:-0.000000
+2gram:tasted good:0.669755
+1gram:good:0.370072
+2gram:good ,:0.000000
+3gram:good , food:3.301693
+3gram:tasted good ,:0.000000" class="bar"></span>
+<span style="height:7.24118208808em" title="Price range:
+3gram:sushi tasted good:0.000000
+2gram:tasted good:-0.682646
+1gram:good:7.967818
+2gram:good ,:0.000000
+3gram:good , food:-0.143990
+3gram:tasted good ,:0.000000" class="bar"></span>
+<span>good</span>
+</div>
+
+<div style="height:3.40169297465em" class="bars">
+<span style="height:3.40169297465em" title="Sentiment:
+3gram:tasted good ,:0.000000
+2gram:good ,:0.000000
+1gram:,:0.000000
+2gram:, food:0.000000
+3gram:, food was:0.000000
+3gram:good , food:3.301693" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:tasted good ,:0.000000
+2gram:good ,:0.000000
+1gram:,:0.000000
+2gram:, food:0.000000
+3gram:, food was:0.000000
+3gram:good , food:-0.143990" class="bar"></span>
+<span>,</span>
+</div>
+
+<div style="height:4.01268810906em" class="bars">
+<span style="height:4.01268810906em" title="Sentiment:
+3gram:good , food:3.301693
+2gram:, food:0.000000
+1gram:food:-0.711425
+2gram:food was:0.000000
+3gram:food was fresh:1.322420
+3gram:, food was:0.000000" class="bar"></span>
+<span style="height:0.214081009706em" title="Price range:
+3gram:good , food:-0.143990
+2gram:, food:0.000000
+1gram:food:-0.098557
+2gram:food was:0.000000
+3gram:food was fresh:0.356628
+3gram:, food was:0.000000" class="bar"></span>
+<span>food</span>
+</div>
+
+<div style="height:1.42242035576em" class="bars">
+<span style="height:1.42242035576em" title="Sentiment:
+3gram:, food was:0.000000
+2gram:food was:0.000000
+1gram:was:0.000000
+2gram:was fresh:0.000000
+3gram:was fresh but:0.000000
+3gram:food was fresh:1.322420" class="bar"></span>
+<span style="height:0.456627793244em" title="Price range:
+3gram:, food was:0.000000
+2gram:food was:0.000000
+1gram:was:0.000000
+2gram:was fresh:0.000000
+3gram:was fresh but:0.000000
+3gram:food was fresh:0.356628" class="bar"></span>
+<span>was</span>
+</div>
+
+<div style="height:1.20345266243em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:food was fresh:1.322420
+2gram:was fresh:0.000000
+1gram:fresh:2.538163
+2gram:fresh but:-5.168904
+3gram:fresh but nothing:-0.000000
+3gram:was fresh but:0.000000" class="bar"></span>
+<span style="height:1.20345266243em" title="Price range:
+3gram:food was fresh:0.356628
+2gram:was fresh:0.000000
+1gram:fresh:0.737121
+2gram:fresh but:0.000000
+3gram:fresh but nothing:0.009704
+3gram:was fresh but:0.000000" class="bar"></span>
+<span>fresh</span>
+</div>
+
+<div style="height:0.109703804648em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:was fresh but:0.000000
+2gram:fresh but:-5.168904
+1gram:but:-1.783433
+2gram:but nothing:-1.736470
+3gram:but nothing left:-0.000000
+3gram:fresh but nothing:-0.000000" class="bar"></span>
+<span style="height:0.109703804648em" title="Price range:
+3gram:was fresh but:0.000000
+2gram:fresh but:0.000000
+1gram:but:0.000000
+2gram:but nothing:0.000000
+3gram:but nothing left:0.000000
+3gram:fresh but nothing:0.009704" class="bar"></span>
+<span>but</span>
+</div>
+
+<div style="height:1.31389835591em" class="bars">
+<span style="height:1.31389835591em" title="Sentiment:
+3gram:fresh but nothing:-0.000000
+2gram:but nothing:-1.736470
+1gram:nothing:-4.569045
+2gram:nothing left:7.519413
+3gram:nothing left me:-0.000000
+3gram:but nothing left:-0.000000" class="bar"></span>
+<span style="height:1.18999052828em" title="Price range:
+3gram:fresh but nothing:0.009704
+2gram:but nothing:0.000000
+1gram:nothing:1.088044
+2gram:nothing left:-0.007757
+3gram:nothing left me:0.000000
+3gram:but nothing left:0.000000" class="bar"></span>
+<span>nothing</span>
+</div>
+
+<div style="height:3.4524175374em" class="bars">
+<span style="height:3.4524175374em" title="Sentiment:
+3gram:but nothing left:-0.000000
+2gram:nothing left:7.519413
+1gram:left:-1.447324
+2gram:left me:-2.719671
+3gram:left me yearning:-0.000000
+3gram:nothing left me:-0.000000" class="bar"></span>
+<span style="height:1.92532580551em" title="Price range:
+3gram:but nothing left:0.000000
+2gram:nothing left:-0.007757
+1gram:left:1.210643
+2gram:left me:0.622440
+3gram:left me yearning:0.000000
+3gram:nothing left me:0.000000" class="bar"></span>
+<span>left</span>
+</div>
+
+<div style="height:2.75584313522em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:nothing left me:-0.000000
+2gram:left me:-2.719671
+1gram:me:-0.045482
+2gram:me yearning:-8.109825
+3gram:me yearning to:0.000000
+3gram:left me yearning:-0.000000" class="bar"></span>
+<span style="height:2.75584313522em" title="Price range:
+3gram:nothing left me:0.000000
+2gram:left me:0.622440
+1gram:me:2.046398
+2gram:me yearning:-0.012995
+3gram:me yearning to:0.000000
+3gram:left me yearning:0.000000" class="bar"></span>
+<span>me</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:left me yearning:-0.000000
+2gram:me yearning:-8.109825
+1gram:yearning:2.686094
+2gram:yearning to:0.000000
+3gram:yearning to return:-0.000000
+3gram:me yearning to:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:left me yearning:0.000000
+2gram:me yearning:-0.012995
+1gram:yearning:-0.153280
+2gram:yearning to:0.000000
+3gram:yearning to return:0.000000
+3gram:me yearning to:0.000000" class="bar"></span>
+<span>yearning</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:me yearning to:0.000000
+2gram:yearning to:0.000000
+1gram:to:0.000000
+2gram:to return:0.000000
+3gram:to return *:0.000000
+3gram:yearning to return:-0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:me yearning to:0.000000
+2gram:yearning to:0.000000
+1gram:to:0.000000
+2gram:to return:0.000000
+3gram:to return *:0.000000
+3gram:yearning to return:0.000000" class="bar"></span>
+<span>to</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:yearning to return:-0.000000
+2gram:to return:0.000000
+1gram:return:-0.954437
+2gram:return *:0.000000
+3gram:return * *:0.000000
+3gram:to return *:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:yearning to return:0.000000
+2gram:to return:0.000000
+1gram:return:-0.107797
+2gram:return *:0.000000
+3gram:return * *:0.000000
+3gram:to return *:0.000000" class="bar"></span>
+<span>return</span>
+</div>
+
+</div>
+<div class="sentence">great dark , sexy atmosphere . good service . nice variety of tasty cocktails . sushi tasted good , food was fresh but nothing left me yearning to return</div>
+<div class="down">
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:* * great:0.000000
+2gram:* great:0.000000
+1gram:great:4.179819
+2gram:great dark:-0.000000
+3gram:great dark ,:0.000000
+3gram:* great dark:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:* * great:0.000000
+2gram:* great:0.000000
+1gram:great:4.285574
+2gram:great dark:0.000494
+3gram:great dark ,:0.000000
+3gram:* great dark:0.000000" class="bar"></span>
+<span>great</span>
+</div>
+
+<div style="height:0.684566664448em" class="bars">
+<span style="height:0.684566664448em" title="Sentiment:
+3gram:* great dark:0.000000
+2gram:great dark:-0.000000
+1gram:dark:-0.584567
+2gram:dark ,:0.000000
+3gram:dark , sexy:-0.000000
+3gram:great dark ,:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:* great dark:0.000000
+2gram:great dark:0.000494
+1gram:dark:1.588610
+2gram:dark ,:0.000000
+3gram:dark , sexy:-0.002061
+3gram:great dark ,:0.000000" class="bar"></span>
+<span>dark</span>
+</div>
+
+<div style="height:0.102061302726em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:great dark ,:0.000000
+2gram:dark ,:0.000000
+1gram:,:0.000000
+2gram:, sexy:0.000000
+3gram:, sexy atmosphere:0.000000
+3gram:dark , sexy:-0.000000" class="bar"></span>
+<span style="height:0.102061302726em" title="Price range:
+3gram:great dark ,:0.000000
+2gram:dark ,:0.000000
+1gram:,:0.000000
+2gram:, sexy:0.000000
+3gram:, sexy atmosphere:0.000000
+3gram:dark , sexy:-0.002061" class="bar"></span>
+<span>,</span>
+</div>
+
+<div style="height:0.114388249484em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:dark , sexy:-0.000000
+2gram:, sexy:0.000000
+1gram:sexy:4.742012
+2gram:sexy atmosphere:-0.000000
+3gram:sexy atmosphere .:0.000000
+3gram:, sexy atmosphere:0.000000" class="bar"></span>
+<span style="height:0.114388249484em" title="Price range:
+3gram:dark , sexy:-0.002061
+2gram:, sexy:0.000000
+1gram:sexy:-0.012759
+2gram:sexy atmosphere:0.000432
+3gram:sexy atmosphere .:0.000000
+3gram:, sexy atmosphere:0.000000" class="bar"></span>
+<span>sexy</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:, sexy atmosphere:0.000000
+2gram:sexy atmosphere:-0.000000
+1gram:atmosphere:1.044883
+2gram:atmosphere .:0.000000
+3gram:atmosphere . good:0.000000
+3gram:sexy atmosphere .:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:, sexy atmosphere:0.000000
+2gram:sexy atmosphere:0.000432
+1gram:atmosphere:12.360666
+2gram:atmosphere .:0.000000
+3gram:atmosphere . good:0.000000
+3gram:sexy atmosphere .:0.000000" class="bar"></span>
+<span>atmosphere</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:sexy atmosphere .:0.000000
+2gram:atmosphere .:0.000000
+1gram:.:0.000000
+2gram:. good:0.000000
+3gram:. good service:0.000000
+3gram:atmosphere . good:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:sexy atmosphere .:0.000000
+2gram:atmosphere .:0.000000
+1gram:.:0.000000
+2gram:. good:0.000000
+3gram:. good service:0.000000
+3gram:atmosphere . good:0.000000" class="bar"></span>
+<span>.</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:atmosphere . good:0.000000
+2gram:. good:0.000000
+1gram:good:0.370072
+2gram:good service:2.039063
+3gram:good service .:0.000000
+3gram:. good service:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:atmosphere . good:0.000000
+2gram:. good:0.000000
+1gram:good:7.967818
+2gram:good service:0.549017
+3gram:good service .:0.000000
+3gram:. good service:0.000000" class="bar"></span>
+<span>good</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:. good service:0.000000
+2gram:good service:2.039063
+1gram:service:-1.153513
+2gram:service .:0.000000
+3gram:service . nice:0.000000
+3gram:good service .:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:. good service:0.000000
+2gram:good service:0.549017
+1gram:service:15.133639
+2gram:service .:0.000000
+3gram:service . nice:0.000000
+3gram:good service .:0.000000" class="bar"></span>
+<span>service</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:good service .:0.000000
+2gram:service .:0.000000
+1gram:.:0.000000
+2gram:. nice:0.000000
+3gram:. nice variety:0.000000
+3gram:service . nice:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:good service .:0.000000
+2gram:service .:0.000000
+1gram:.:0.000000
+2gram:. nice:0.000000
+3gram:. nice variety:0.000000
+3gram:service . nice:0.000000" class="bar"></span>
+<span>.</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:service . nice:0.000000
+2gram:. nice:0.000000
+1gram:nice:0.202350
+2gram:nice variety:1.310713
+3gram:nice variety of:0.000000
+3gram:. nice variety:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:service . nice:0.000000
+2gram:. nice:0.000000
+1gram:nice:6.412159
+2gram:nice variety:-0.116152
+3gram:nice variety of:0.000000
+3gram:. nice variety:0.000000" class="bar"></span>
+<span>nice</span>
+</div>
+
+<div style="height:1.22122209683em" class="bars">
+<span style="height:0.0106126179486em" title="Sentiment:
+3gram:. nice variety:0.000000
+2gram:nice variety:1.310713
+1gram:variety:0.407087
+2gram:variety of:0.000000
+3gram:variety of tasty:-1.628412
+3gram:nice variety of:0.000000" class="bar"></span>
+<span style="height:1.22122209683em" title="Price range:
+3gram:. nice variety:0.000000
+2gram:nice variety:-0.116152
+1gram:variety:-1.011928
+2gram:variety of:0.000000
+3gram:variety of tasty:0.006857
+3gram:nice variety of:0.000000" class="bar"></span>
+<span>variety</span>
+</div>
+
+<div style="height:1.72841210447em" class="bars">
+<span style="height:1.72841210447em" title="Sentiment:
+3gram:nice variety of:0.000000
+2gram:variety of:0.000000
+1gram:of:0.000000
+2gram:of tasty:0.000000
+3gram:of tasty cocktails:0.000000
+3gram:variety of tasty:-1.628412" class="bar"></span>
+<span style="height:0.093142750871em" title="Price range:
+3gram:nice variety of:0.000000
+2gram:variety of:0.000000
+1gram:of:0.000000
+2gram:of tasty:0.000000
+3gram:of tasty cocktails:0.000000
+3gram:variety of tasty:0.006857" class="bar"></span>
+<span>of</span>
+</div>
+
+<div style="height:1.42233882297em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:variety of tasty:-1.628412
+2gram:of tasty:0.000000
+1gram:tasty:2.086549
+2gram:tasty cocktails:0.574460
+3gram:tasty cocktails .:0.000000
+3gram:of tasty cocktails:0.000000" class="bar"></span>
+<span style="height:1.42233882297em" title="Price range:
+3gram:variety of tasty:0.006857
+2gram:of tasty:0.000000
+1gram:tasty:-1.330161
+2gram:tasty cocktails:0.000965
+3gram:tasty cocktails .:0.000000
+3gram:of tasty cocktails:0.000000" class="bar"></span>
+<span>tasty</span>
+</div>
+
+<div style="height:0.362376128331em" class="bars">
+<span style="height:0.0074983909546em" title="Sentiment:
+3gram:of tasty cocktails:0.000000
+2gram:tasty cocktails:0.574460
+1gram:cocktails:-0.481959
+2gram:cocktails .:0.000000
+3gram:cocktails . sushi:0.000000
+3gram:tasty cocktails .:0.000000" class="bar"></span>
+<span style="height:0.362376128331em" title="Price range:
+3gram:of tasty cocktails:0.000000
+2gram:tasty cocktails:0.000965
+1gram:cocktails:-0.263341
+2gram:cocktails .:0.000000
+3gram:cocktails . sushi:0.000000
+3gram:tasty cocktails .:0.000000" class="bar"></span>
+<span>cocktails</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:tasty cocktails .:0.000000
+2gram:cocktails .:0.000000
+1gram:.:0.000000
+2gram:. sushi:0.000000
+3gram:. sushi tasted:0.000000
+3gram:cocktails . sushi:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:tasty cocktails .:0.000000
+2gram:cocktails .:0.000000
+1gram:.:0.000000
+2gram:. sushi:0.000000
+3gram:. sushi tasted:0.000000
+3gram:cocktails . sushi:0.000000" class="bar"></span>
+<span>.</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:cocktails . sushi:0.000000
+2gram:. sushi:0.000000
+1gram:sushi:0.168944
+2gram:sushi tasted:-0.000000
+3gram:sushi tasted good:-0.000000
+3gram:. sushi tasted:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:cocktails . sushi:0.000000
+2gram:. sushi:0.000000
+1gram:sushi:12.931068
+2gram:sushi tasted:-0.065043
+3gram:sushi tasted good:0.000000
+3gram:. sushi tasted:0.000000" class="bar"></span>
+<span>sushi</span>
+</div>
+
+<div style="height:1.55885119083em" class="bars">
+<span style="height:1.55885119083em" title="Sentiment:
+3gram:. sushi tasted:0.000000
+2gram:sushi tasted:-0.000000
+1gram:tasted:-2.128606
+2gram:tasted good:0.669755
+3gram:tasted good ,:0.000000
+3gram:sushi tasted good:-0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:. sushi tasted:0.000000
+2gram:sushi tasted:-0.065043
+1gram:tasted:1.173520
+2gram:tasted good:-0.682646
+3gram:tasted good ,:0.000000
+3gram:sushi tasted good:0.000000" class="bar"></span>
+<span>tasted</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:sushi tasted good:-0.000000
+2gram:tasted good:0.669755
+1gram:good:0.370072
+2gram:good ,:0.000000
+3gram:good , food:3.301693
+3gram:tasted good ,:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:sushi tasted good:0.000000
+2gram:tasted good:-0.682646
+1gram:good:7.967818
+2gram:good ,:0.000000
+3gram:good , food:-0.143990
+3gram:tasted good ,:0.000000" class="bar"></span>
+<span>good</span>
+</div>
+
+<div style="height:0.243989648223em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:tasted good ,:0.000000
+2gram:good ,:0.000000
+1gram:,:0.000000
+2gram:, food:0.000000
+3gram:, food was:0.000000
+3gram:good , food:3.301693" class="bar"></span>
+<span style="height:0.243989648223em" title="Price range:
+3gram:tasted good ,:0.000000
+2gram:good ,:0.000000
+1gram:,:0.000000
+2gram:, food:0.000000
+3gram:, food was:0.000000
+3gram:good , food:-0.143990" class="bar"></span>
+<span>,</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:good , food:3.301693
+2gram:, food:0.000000
+1gram:food:-0.711425
+2gram:food was:0.000000
+3gram:food was fresh:1.322420
+3gram:, food was:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:good , food:-0.143990
+2gram:, food:0.000000
+1gram:food:-0.098557
+2gram:food was:0.000000
+3gram:food was fresh:0.356628
+3gram:, food was:0.000000" class="bar"></span>
+<span>food</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:, food was:0.000000
+2gram:food was:0.000000
+1gram:was:0.000000
+2gram:was fresh:0.000000
+3gram:was fresh but:0.000000
+3gram:food was fresh:1.322420" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:, food was:0.000000
+2gram:food was:0.000000
+1gram:was:0.000000
+2gram:was fresh:0.000000
+3gram:was fresh but:0.000000
+3gram:food was fresh:0.356628" class="bar"></span>
+<span>was</span>
+</div>
+
+<div style="height:1.4083204034em" class="bars">
+<span style="height:1.4083204034em" title="Sentiment:
+3gram:food was fresh:1.322420
+2gram:was fresh:0.000000
+1gram:fresh:2.538163
+2gram:fresh but:-5.168904
+3gram:fresh but nothing:-0.000000
+3gram:was fresh but:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:food was fresh:0.356628
+2gram:was fresh:0.000000
+1gram:fresh:0.737121
+2gram:fresh but:0.000000
+3gram:fresh but nothing:0.009704
+3gram:was fresh but:0.000000" class="bar"></span>
+<span>fresh</span>
+</div>
+
+<div style="height:8.78880677489em" class="bars">
+<span style="height:8.78880677489em" title="Sentiment:
+3gram:was fresh but:0.000000
+2gram:fresh but:-5.168904
+1gram:but:-1.783433
+2gram:but nothing:-1.736470
+3gram:but nothing left:-0.000000
+3gram:fresh but nothing:-0.000000" class="bar"></span>
+<span style="height:0.0902961953518em" title="Price range:
+3gram:was fresh but:0.000000
+2gram:fresh but:0.000000
+1gram:but:0.000000
+2gram:but nothing:0.000000
+3gram:but nothing left:0.000000
+3gram:fresh but nothing:0.009704" class="bar"></span>
+<span>but</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:fresh but nothing:-0.000000
+2gram:but nothing:-1.736470
+1gram:nothing:-4.569045
+2gram:nothing left:7.519413
+3gram:nothing left me:-0.000000
+3gram:but nothing left:-0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:fresh but nothing:0.009704
+2gram:but nothing:0.000000
+1gram:nothing:1.088044
+2gram:nothing left:-0.007757
+3gram:nothing left me:0.000000
+3gram:but nothing left:0.000000" class="bar"></span>
+<span>nothing</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:but nothing left:-0.000000
+2gram:nothing left:7.519413
+1gram:left:-1.447324
+2gram:left me:-2.719671
+3gram:left me yearning:-0.000000
+3gram:nothing left me:-0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:but nothing left:0.000000
+2gram:nothing left:-0.007757
+1gram:left:1.210643
+2gram:left me:0.622440
+3gram:left me yearning:0.000000
+3gram:nothing left me:0.000000" class="bar"></span>
+<span>left</span>
+</div>
+
+<div style="height:10.9749783741em" class="bars">
+<span style="height:10.9749783741em" title="Sentiment:
+3gram:nothing left me:-0.000000
+2gram:left me:-2.719671
+1gram:me:-0.045482
+2gram:me yearning:-8.109825
+3gram:me yearning to:0.000000
+3gram:left me yearning:-0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:nothing left me:0.000000
+2gram:left me:0.622440
+1gram:me:2.046398
+2gram:me yearning:-0.012995
+3gram:me yearning to:0.000000
+3gram:left me yearning:0.000000" class="bar"></span>
+<span>me</span>
+</div>
+
+<div style="height:5.52373127576em" class="bars">
+<span style="height:5.52373127576em" title="Sentiment:
+3gram:left me yearning:-0.000000
+2gram:me yearning:-8.109825
+1gram:yearning:2.686094
+2gram:yearning to:0.000000
+3gram:yearning to return:-0.000000
+3gram:me yearning to:0.000000" class="bar"></span>
+<span style="height:0.266274778684em" title="Price range:
+3gram:left me yearning:0.000000
+2gram:me yearning:-0.012995
+1gram:yearning:-0.153280
+2gram:yearning to:0.000000
+3gram:yearning to return:0.000000
+3gram:me yearning to:0.000000" class="bar"></span>
+<span>yearning</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:me yearning to:0.000000
+2gram:yearning to:0.000000
+1gram:to:0.000000
+2gram:to return:0.000000
+3gram:to return *:0.000000
+3gram:yearning to return:-0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:me yearning to:0.000000
+2gram:yearning to:0.000000
+1gram:to:0.000000
+2gram:to return:0.000000
+3gram:to return *:0.000000
+3gram:yearning to return:0.000000" class="bar"></span>
+<span>to</span>
+</div>
+
+<div style="height:1.05443668604em" class="bars">
+<span style="height:1.05443668604em" title="Sentiment:
+3gram:yearning to return:-0.000000
+2gram:to return:0.000000
+1gram:return:-0.954437
+2gram:return *:0.000000
+3gram:return * *:0.000000
+3gram:to return *:0.000000" class="bar"></span>
+<span style="height:0.207796862945em" title="Price range:
+3gram:yearning to return:0.000000
+2gram:to return:0.000000
+1gram:return:-0.107797
+2gram:return *:0.000000
+3gram:return * *:0.000000
+3gram:to return *:0.000000" class="bar"></span>
+<span>return</span>
+</div>
+</div>
+
+<div class="up">
+    
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:* * this:0.000000
+2gram:* this:0.000000
+1gram:this:0.000000
+2gram:this place:0.000000
+3gram:this place gets:0.000000
+3gram:* this place:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:* * this:0.000000
+2gram:* this:0.000000
+1gram:this:0.000000
+2gram:this place:0.000000
+3gram:this place gets:0.000000
+3gram:* this place:0.000000" class="bar"></span>
+<span>this</span>
+</div>
+
+<div style="height:24.2635858935em" class="bars">
+<span style="height:5.3531636179em" title="Sentiment:
+3gram:* this place:0.000000
+2gram:this place:0.000000
+1gram:place:-0.143363
+2gram:place gets:-1.891721
+3gram:place gets 5:7.288248
+3gram:this place gets:0.000000" class="bar"></span>
+<span style="height:24.2635858935em" title="Price range:
+3gram:* this place:0.000000
+2gram:this place:0.000000
+1gram:place:23.984324
+2gram:place gets:0.179262
+3gram:place gets 5:0.000000
+3gram:this place gets:0.000000" class="bar"></span>
+<span>place</span>
+</div>
+
+<div style="height:6.8582772903em" class="bars">
+<span style="height:6.8582772903em" title="Sentiment:
+3gram:this place gets:0.000000
+2gram:place gets:-1.891721
+1gram:gets:2.306811
+2gram:gets 5:-0.000000
+3gram:gets 5 stars:-0.945061
+3gram:place gets 5:7.288248" class="bar"></span>
+<span style="height:0.426602053667em" title="Price range:
+3gram:this place gets:0.000000
+2gram:place gets:0.179262
+1gram:gets:0.182789
+2gram:gets 5:0.000000
+3gram:gets 5 stars:-0.035449
+3gram:place gets 5:0.000000" class="bar"></span>
+<span>gets</span>
+</div>
+
+<div style="height:22.0876497622em" class="bars">
+<span style="height:22.0876497622em" title="Sentiment:
+3gram:place gets 5:7.288248
+2gram:gets 5:-0.000000
+1gram:5:2.016405
+2gram:5 stars:13.628057
+3gram:5 stars for:0.000000
+3gram:gets 5 stars:-0.945061" class="bar"></span>
+<span style="height:0.0578325030898em" title="Price range:
+3gram:place gets 5:0.000000
+2gram:gets 5:0.000000
+1gram:5:-0.006719
+2gram:5 stars:0.000000
+3gram:5 stars for:0.000000
+3gram:gets 5 stars:-0.035449" class="bar"></span>
+<span>5</span>
+</div>
+
+<div style="height:15.6055688949em" class="bars">
+<span style="height:15.6055688949em" title="Sentiment:
+3gram:gets 5 stars:-0.945061
+2gram:5 stars:13.628057
+1gram:stars:-3.003906
+2gram:stars for:0.000000
+3gram:stars for food:5.826478
+3gram:5 stars for:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:gets 5 stars:-0.035449
+2gram:5 stars:0.000000
+1gram:stars:-0.087998
+2gram:stars for:0.000000
+3gram:stars for food:-0.021982
+3gram:5 stars for:0.000000" class="bar"></span>
+<span>stars</span>
+</div>
+
+<div style="height:5.92647845325em" class="bars">
+<span style="height:5.92647845325em" title="Sentiment:
+3gram:5 stars for:0.000000
+2gram:stars for:0.000000
+1gram:for:0.000000
+2gram:for food:0.000000
+3gram:for food ,:0.000000
+3gram:stars for food:5.826478" class="bar"></span>
+<span style="height:0.0780181587377em" title="Price range:
+3gram:5 stars for:0.000000
+2gram:stars for:0.000000
+1gram:for:0.000000
+2gram:for food:0.000000
+3gram:for food ,:0.000000
+3gram:stars for food:-0.021982" class="bar"></span>
+<span>for</span>
+</div>
+
+<div style="height:10.9680875225em" class="bars">
+<span style="height:10.9680875225em" title="Sentiment:
+3gram:stars for food:5.826478
+2gram:for food:0.000000
+1gram:food:-0.711425
+2gram:food ,:0.000000
+3gram:food , drinks:5.753034
+3gram:for food ,:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:stars for food:-0.021982
+2gram:for food:0.000000
+1gram:food:-0.098557
+2gram:food ,:0.000000
+3gram:food , drinks:-0.266666
+3gram:for food ,:0.000000" class="bar"></span>
+<span>food</span>
+</div>
+
+<div style="height:5.8530342906em" class="bars">
+<span style="height:5.8530342906em" title="Sentiment:
+3gram:for food ,:0.000000
+2gram:food ,:0.000000
+1gram:,:0.000000
+2gram:, drinks:0.000000
+3gram:, drinks ,:0.000000
+3gram:food , drinks:5.753034" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:for food ,:0.000000
+2gram:food ,:0.000000
+1gram:,:0.000000
+2gram:, drinks:0.000000
+3gram:, drinks ,:0.000000
+3gram:food , drinks:-0.266666" class="bar"></span>
+<span>,</span>
+</div>
+
+<div style="height:7.40510135238em" class="bars">
+<span style="height:5.075691242em" title="Sentiment:
+3gram:food , drinks:5.753034
+2gram:, drinks:0.000000
+1gram:drinks:-0.777343
+2gram:drinks ,:0.000000
+3gram:drinks , and:0.000000
+3gram:, drinks ,:0.000000" class="bar"></span>
+<span style="height:7.40510135238em" title="Price range:
+3gram:food , drinks:-0.266666
+2gram:, drinks:0.000000
+1gram:drinks:7.571768
+2gram:drinks ,:0.000000
+3gram:drinks , and:0.000000
+3gram:, drinks ,:0.000000" class="bar"></span>
+<span>drinks</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:, drinks ,:0.000000
+2gram:drinks ,:0.000000
+1gram:,:0.000000
+2gram:, and:0.000000
+3gram:, and atmosphere:0.000000
+3gram:drinks , and:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:, drinks ,:0.000000
+2gram:drinks ,:0.000000
+1gram:,:0.000000
+2gram:, and:0.000000
+3gram:, and atmosphere:0.000000
+3gram:drinks , and:0.000000" class="bar"></span>
+<span>,</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:drinks , and:0.000000
+2gram:, and:0.000000
+1gram:and:0.000000
+2gram:and atmosphere:0.000000
+3gram:and atmosphere ...:0.000000
+3gram:, and atmosphere:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:drinks , and:0.000000
+2gram:, and:0.000000
+1gram:and:0.000000
+2gram:and atmosphere:0.000000
+3gram:and atmosphere ...:0.000000
+3gram:, and atmosphere:0.000000" class="bar"></span>
+<span>and</span>
+</div>
+
+<div style="height:12.4606663192em" class="bars">
+<span style="height:1.14488259212em" title="Sentiment:
+3gram:, and atmosphere:0.000000
+2gram:and atmosphere:0.000000
+1gram:atmosphere:1.044883
+2gram:atmosphere ...:0.000000
+3gram:atmosphere ... and:0.000000
+3gram:and atmosphere ...:0.000000" class="bar"></span>
+<span style="height:12.4606663192em" title="Price range:
+3gram:, and atmosphere:0.000000
+2gram:and atmosphere:0.000000
+1gram:atmosphere:12.360666
+2gram:atmosphere ...:0.000000
+3gram:atmosphere ... and:0.000000
+3gram:and atmosphere ...:0.000000" class="bar"></span>
+<span>atmosphere</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:and atmosphere ...:0.000000
+2gram:atmosphere ...:0.000000
+1gram:...:0.000000
+2gram:... and:0.000000
+3gram:... and negative:0.000000
+3gram:atmosphere ... and:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:and atmosphere ...:0.000000
+2gram:atmosphere ...:0.000000
+1gram:...:0.000000
+2gram:... and:0.000000
+3gram:... and negative:0.000000
+3gram:atmosphere ... and:0.000000" class="bar"></span>
+<span>...</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:atmosphere ... and:0.000000
+2gram:... and:0.000000
+1gram:and:0.000000
+2gram:and negative:0.000000
+3gram:and negative stars:0.000000
+3gram:... and negative:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:atmosphere ... and:0.000000
+2gram:... and:0.000000
+1gram:and:0.000000
+2gram:and negative:0.000000
+3gram:and negative stars:0.000000
+3gram:... and negative:0.000000" class="bar"></span>
+<span>and</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:... and negative:0.000000
+2gram:and negative:0.000000
+1gram:negative:-1.177256
+2gram:negative stars:-19.773153
+3gram:negative stars for:0.000000
+3gram:and negative stars:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:... and negative:0.000000
+2gram:and negative:0.000000
+1gram:negative:-0.685645
+2gram:negative stars:-0.026304
+3gram:negative stars for:0.000000
+3gram:and negative stars:0.000000" class="bar"></span>
+<span>negative</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:and negative stars:0.000000
+2gram:negative stars:-19.773153
+1gram:stars:-3.003906
+2gram:stars for:0.000000
+3gram:stars for the:0.000000
+3gram:negative stars for:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:and negative stars:0.000000
+2gram:negative stars:-0.026304
+1gram:stars:-0.087998
+2gram:stars for:0.000000
+3gram:stars for the:0.000000
+3gram:negative stars for:0.000000" class="bar"></span>
+<span>stars</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:negative stars for:0.000000
+2gram:stars for:0.000000
+1gram:for:0.000000
+2gram:for the:0.000000
+3gram:for the jar-headed:0.000000
+3gram:stars for the:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:negative stars for:0.000000
+2gram:stars for:0.000000
+1gram:for:0.000000
+2gram:for the:0.000000
+3gram:for the jar-headed:0.000000
+3gram:stars for the:0.000000" class="bar"></span>
+<span>for</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:stars for the:0.000000
+2gram:for the:0.000000
+1gram:the:0.000000
+2gram:the jar-headed:0.000000
+3gram:the jar-headed douche:0.000000
+3gram:for the jar-headed:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:stars for the:0.000000
+2gram:for the:0.000000
+1gram:the:0.000000
+2gram:the jar-headed:0.000000
+3gram:the jar-headed douche:0.000000
+3gram:for the jar-headed:0.000000" class="bar"></span>
+<span>the</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:for the jar-headed:0.000000
+2gram:the jar-headed:0.000000
+1gram:jar-headed:0.000000
+2gram:jar-headed douche:0.000000
+3gram:jar-headed douche bag:0.000000
+3gram:the jar-headed douche:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:for the jar-headed:0.000000
+2gram:the jar-headed:0.000000
+1gram:jar-headed:0.000000
+2gram:jar-headed douche:0.000000
+3gram:jar-headed douche bag:0.000000
+3gram:the jar-headed douche:0.000000" class="bar"></span>
+<span>jar-headed</span>
+</div>
+
+<div style="height:0.0450918019532em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:the jar-headed douche:0.000000
+2gram:jar-headed douche:0.000000
+1gram:douche:-4.737224
+2gram:douche bag:0.036498
+3gram:douche bag &quot;:0.000000
+3gram:jar-headed douche bag:0.000000" class="bar"></span>
+<span style="height:0.0450918019532em" title="Price range:
+3gram:the jar-headed douche:0.000000
+2gram:jar-headed douche:0.000000
+1gram:douche:-0.056450
+2gram:douche bag:0.001542
+3gram:douche bag &quot;:0.000000
+3gram:jar-headed douche bag:0.000000" class="bar"></span>
+<span>douche</span>
+</div>
+
+<div style="height:1.10274209075em" class="bars">
+<span style="height:0.153420342804em" title="Sentiment:
+3gram:jar-headed douche bag:0.000000
+2gram:douche bag:0.036498
+1gram:bag:0.016922
+2gram:bag &quot;:0.000000
+3gram:bag &quot; security:0.000000
+3gram:douche bag &quot;:0.000000" class="bar"></span>
+<span style="height:1.10274209075em" title="Price range:
+3gram:jar-headed douche bag:0.000000
+2gram:douche bag:0.001542
+1gram:bag:1.001201
+2gram:bag &quot;:0.000000
+3gram:bag &quot; security:0.000000
+3gram:douche bag &quot;:0.000000" class="bar"></span>
+<span>bag</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:douche bag &quot;:0.000000
+2gram:bag &quot;:0.000000
+1gram:&quot;:0.000000
+2gram:&quot; security:0.000000
+3gram:&quot; security guards:0.000000
+3gram:bag &quot; security:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:douche bag &quot;:0.000000
+2gram:bag &quot;:0.000000
+1gram:&quot;:0.000000
+2gram:&quot; security:0.000000
+3gram:&quot; security guards:0.000000
+3gram:bag &quot; security:0.000000" class="bar"></span>
+<span>"</span>
+</div>
+
+<div style="height:2.27479705402em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:bag &quot; security:0.000000
+2gram:&quot; security:0.000000
+1gram:security:-2.030756
+2gram:security guards:-0.000000
+3gram:security guards &quot;:0.000000
+3gram:&quot; security guards:0.000000" class="bar"></span>
+<span style="height:2.27479705402em" title="Price range:
+3gram:bag &quot; security:0.000000
+2gram:&quot; security:0.000000
+1gram:security:2.470729
+2gram:security guards:-0.295932
+3gram:security guards &quot;:0.000000
+3gram:&quot; security guards:0.000000" class="bar"></span>
+<span>security</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:&quot; security guards:0.000000
+2gram:security guards:-0.000000
+1gram:guards:-2.853748
+2gram:guards &quot;:0.000000
+3gram:guards &quot; *:0.000000
+3gram:security guards &quot;:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:&quot; security guards:0.000000
+2gram:security guards:-0.295932
+1gram:guards:-0.134083
+2gram:guards &quot;:0.000000
+3gram:guards &quot; *:0.000000
+3gram:security guards &quot;:0.000000" class="bar"></span>
+<span>guards</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:security guards &quot;:0.000000
+2gram:guards &quot;:0.000000
+1gram:&quot;:0.000000
+2gram:&quot; *:0.000000
+3gram:&quot; * *:0.000000
+3gram:guards &quot; *:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:security guards &quot;:0.000000
+2gram:guards &quot;:0.000000
+1gram:&quot;:0.000000
+2gram:&quot; *:0.000000
+3gram:&quot; * *:0.000000
+3gram:guards &quot; *:0.000000" class="bar"></span>
+<span>"</span>
+</div>
+</div>
+<div class="sentence">this place gets 5 stars for food , drinks , and atmosphere ... and negative stars for the jar-headed douche bag " security guards "</div>
+<div class="down">
+    
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:* * this:0.000000
+2gram:* this:0.000000
+1gram:this:0.000000
+2gram:this place:0.000000
+3gram:this place gets:0.000000
+3gram:* this place:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:* * this:0.000000
+2gram:* this:0.000000
+1gram:this:0.000000
+2gram:this place:0.000000
+3gram:this place gets:0.000000
+3gram:* this place:0.000000" class="bar"></span>
+<span>this</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:* this place:0.000000
+2gram:this place:0.000000
+1gram:place:-0.143363
+2gram:place gets:-1.891721
+3gram:place gets 5:7.288248
+3gram:this place gets:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:* this place:0.000000
+2gram:this place:0.000000
+1gram:place:23.984324
+2gram:place gets:0.179262
+3gram:place gets 5:0.000000
+3gram:this place gets:0.000000" class="bar"></span>
+<span>place</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:this place gets:0.000000
+2gram:place gets:-1.891721
+1gram:gets:2.306811
+2gram:gets 5:-0.000000
+3gram:gets 5 stars:-0.945061
+3gram:place gets 5:7.288248" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:this place gets:0.000000
+2gram:place gets:0.179262
+1gram:gets:0.182789
+2gram:gets 5:0.000000
+3gram:gets 5 stars:-0.035449
+3gram:place gets 5:0.000000" class="bar"></span>
+<span>gets</span>
+</div>
+
+<div style="height:0.14216749691em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:place gets 5:7.288248
+2gram:gets 5:-0.000000
+1gram:5:2.016405
+2gram:5 stars:13.628057
+3gram:5 stars for:0.000000
+3gram:gets 5 stars:-0.945061" class="bar"></span>
+<span style="height:0.14216749691em" title="Price range:
+3gram:place gets 5:0.000000
+2gram:gets 5:0.000000
+1gram:5:-0.006719
+2gram:5 stars:0.000000
+3gram:5 stars for:0.000000
+3gram:gets 5 stars:-0.035449" class="bar"></span>
+<span>5</span>
+</div>
+
+<div style="height:0.245428120331em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:gets 5 stars:-0.945061
+2gram:5 stars:13.628057
+1gram:stars:-3.003906
+2gram:stars for:0.000000
+3gram:stars for food:5.826478
+3gram:5 stars for:0.000000" class="bar"></span>
+<span style="height:0.245428120331em" title="Price range:
+3gram:gets 5 stars:-0.035449
+2gram:5 stars:0.000000
+1gram:stars:-0.087998
+2gram:stars for:0.000000
+3gram:stars for food:-0.021982
+3gram:5 stars for:0.000000" class="bar"></span>
+<span>stars</span>
+</div>
+
+<div style="height:0.121981841262em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:5 stars for:0.000000
+2gram:stars for:0.000000
+1gram:for:0.000000
+2gram:for food:0.000000
+3gram:for food ,:0.000000
+3gram:stars for food:5.826478" class="bar"></span>
+<span style="height:0.121981841262em" title="Price range:
+3gram:5 stars for:0.000000
+2gram:stars for:0.000000
+1gram:for:0.000000
+2gram:for food:0.000000
+3gram:for food ,:0.000000
+3gram:stars for food:-0.021982" class="bar"></span>
+<span>for</span>
+</div>
+
+<div style="height:0.487205437117em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:stars for food:5.826478
+2gram:for food:0.000000
+1gram:food:-0.711425
+2gram:food ,:0.000000
+3gram:food , drinks:5.753034
+3gram:for food ,:0.000000" class="bar"></span>
+<span style="height:0.487205437117em" title="Price range:
+3gram:stars for food:-0.021982
+2gram:for food:0.000000
+1gram:food:-0.098557
+2gram:food ,:0.000000
+3gram:food , drinks:-0.266666
+3gram:for food ,:0.000000" class="bar"></span>
+<span>food</span>
+</div>
+
+<div style="height:0.366666460539em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:for food ,:0.000000
+2gram:food ,:0.000000
+1gram:,:0.000000
+2gram:, drinks:0.000000
+3gram:, drinks ,:0.000000
+3gram:food , drinks:5.753034" class="bar"></span>
+<span style="height:0.366666460539em" title="Price range:
+3gram:for food ,:0.000000
+2gram:food ,:0.000000
+1gram:,:0.000000
+2gram:, drinks:0.000000
+3gram:, drinks ,:0.000000
+3gram:food , drinks:-0.266666" class="bar"></span>
+<span>,</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:food , drinks:5.753034
+2gram:, drinks:0.000000
+1gram:drinks:-0.777343
+2gram:drinks ,:0.000000
+3gram:drinks , and:0.000000
+3gram:, drinks ,:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:food , drinks:-0.266666
+2gram:, drinks:0.000000
+1gram:drinks:7.571768
+2gram:drinks ,:0.000000
+3gram:drinks , and:0.000000
+3gram:, drinks ,:0.000000" class="bar"></span>
+<span>drinks</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:, drinks ,:0.000000
+2gram:drinks ,:0.000000
+1gram:,:0.000000
+2gram:, and:0.000000
+3gram:, and atmosphere:0.000000
+3gram:drinks , and:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:, drinks ,:0.000000
+2gram:drinks ,:0.000000
+1gram:,:0.000000
+2gram:, and:0.000000
+3gram:, and atmosphere:0.000000
+3gram:drinks , and:0.000000" class="bar"></span>
+<span>,</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:drinks , and:0.000000
+2gram:, and:0.000000
+1gram:and:0.000000
+2gram:and atmosphere:0.000000
+3gram:and atmosphere ...:0.000000
+3gram:, and atmosphere:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:drinks , and:0.000000
+2gram:, and:0.000000
+1gram:and:0.000000
+2gram:and atmosphere:0.000000
+3gram:and atmosphere ...:0.000000
+3gram:, and atmosphere:0.000000" class="bar"></span>
+<span>and</span>
+</div>
+
+<div style="height:0em" class="bars">
+<span style="height:0em" title="Sentiment:
+3gram:, and atmosphere:0.000000
+2gram:and atmosphere:0.000000
+1gram:atmosphere:1.044883
+2gram:atmosphere ...:0.000000
+3gram:atmosphere ... and:0.000000
+3gram:and atmosphere ...:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:, and atmosphere:0.000000
+2gram:and atmosphere:0.000000
+1gram:atmosphere:12.360666
+2gram:atmosphere ...:0.000000
+3gram:atmosphere ... and:0.000000
+3gram:and atmosphere ...:0.000000" class="bar"></span>
+<span>atmosphere</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:and atmosphere ...:0.000000
+2gram:atmosphere ...:0.000000
+1gram:...:0.000000
+2gram:... and:0.000000
+3gram:... and negative:0.000000
+3gram:atmosphere ... and:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:and atmosphere ...:0.000000
+2gram:atmosphere ...:0.000000
+1gram:...:0.000000
+2gram:... and:0.000000
+3gram:... and negative:0.000000
+3gram:atmosphere ... and:0.000000" class="bar"></span>
+<span>...</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:atmosphere ... and:0.000000
+2gram:... and:0.000000
+1gram:and:0.000000
+2gram:and negative:0.000000
+3gram:and negative stars:0.000000
+3gram:... and negative:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:atmosphere ... and:0.000000
+2gram:... and:0.000000
+1gram:and:0.000000
+2gram:and negative:0.000000
+3gram:and negative stars:0.000000
+3gram:... and negative:0.000000" class="bar"></span>
+<span>and</span>
+</div>
+
+<div style="height:21.050409018em" class="bars">
+<span style="height:21.050409018em" title="Sentiment:
+3gram:... and negative:0.000000
+2gram:and negative:0.000000
+1gram:negative:-1.177256
+2gram:negative stars:-19.773153
+3gram:negative stars for:0.000000
+3gram:and negative stars:0.000000" class="bar"></span>
+<span style="height:0.811948525289em" title="Price range:
+3gram:... and negative:0.000000
+2gram:and negative:0.000000
+1gram:negative:-0.685645
+2gram:negative stars:-0.026304
+3gram:negative stars for:0.000000
+3gram:and negative stars:0.000000" class="bar"></span>
+<span>negative</span>
+</div>
+
+<div style="height:22.8770587907em" class="bars">
+<span style="height:22.8770587907em" title="Sentiment:
+3gram:and negative stars:0.000000
+2gram:negative stars:-19.773153
+1gram:stars:-3.003906
+2gram:stars for:0.000000
+3gram:stars for the:0.000000
+3gram:negative stars for:0.000000" class="bar"></span>
+<span style="height:0.214301663169em" title="Price range:
+3gram:and negative stars:0.000000
+2gram:negative stars:-0.026304
+1gram:stars:-0.087998
+2gram:stars for:0.000000
+3gram:stars for the:0.000000
+3gram:negative stars for:0.000000" class="bar"></span>
+<span>stars</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:negative stars for:0.000000
+2gram:stars for:0.000000
+1gram:for:0.000000
+2gram:for the:0.000000
+3gram:for the jar-headed:0.000000
+3gram:stars for the:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:negative stars for:0.000000
+2gram:stars for:0.000000
+1gram:for:0.000000
+2gram:for the:0.000000
+3gram:for the jar-headed:0.000000
+3gram:stars for the:0.000000" class="bar"></span>
+<span>for</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:stars for the:0.000000
+2gram:for the:0.000000
+1gram:the:0.000000
+2gram:the jar-headed:0.000000
+3gram:the jar-headed douche:0.000000
+3gram:for the jar-headed:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:stars for the:0.000000
+2gram:for the:0.000000
+1gram:the:0.000000
+2gram:the jar-headed:0.000000
+3gram:the jar-headed douche:0.000000
+3gram:for the jar-headed:0.000000" class="bar"></span>
+<span>the</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:for the jar-headed:0.000000
+2gram:the jar-headed:0.000000
+1gram:jar-headed:0.000000
+2gram:jar-headed douche:0.000000
+3gram:jar-headed douche bag:0.000000
+3gram:the jar-headed douche:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:for the jar-headed:0.000000
+2gram:the jar-headed:0.000000
+1gram:jar-headed:0.000000
+2gram:jar-headed douche:0.000000
+3gram:jar-headed douche bag:0.000000
+3gram:the jar-headed douche:0.000000" class="bar"></span>
+<span>jar-headed</span>
+</div>
+
+<div style="height:4.80072570353em" class="bars">
+<span style="height:4.80072570353em" title="Sentiment:
+3gram:the jar-headed douche:0.000000
+2gram:jar-headed douche:0.000000
+1gram:douche:-4.737224
+2gram:douche bag:0.036498
+3gram:douche bag &quot;:0.000000
+3gram:jar-headed douche bag:0.000000" class="bar"></span>
+<span style="height:0.154908198047em" title="Price range:
+3gram:the jar-headed douche:0.000000
+2gram:jar-headed douche:0.000000
+1gram:douche:-0.056450
+2gram:douche bag:0.001542
+3gram:douche bag &quot;:0.000000
+3gram:jar-headed douche bag:0.000000" class="bar"></span>
+<span>douche</span>
+</div>
+
+<div style="height:0.0465796571958em" class="bars">
+<span style="height:0.0465796571958em" title="Sentiment:
+3gram:jar-headed douche bag:0.000000
+2gram:douche bag:0.036498
+1gram:bag:0.016922
+2gram:bag &quot;:0.000000
+3gram:bag &quot; security:0.000000
+3gram:douche bag &quot;:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:jar-headed douche bag:0.000000
+2gram:douche bag:0.001542
+1gram:bag:1.001201
+2gram:bag &quot;:0.000000
+3gram:bag &quot; security:0.000000
+3gram:douche bag &quot;:0.000000" class="bar"></span>
+<span>bag</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:douche bag &quot;:0.000000
+2gram:bag &quot;:0.000000
+1gram:&quot;:0.000000
+2gram:&quot; security:0.000000
+3gram:&quot; security guards:0.000000
+3gram:bag &quot; security:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:douche bag &quot;:0.000000
+2gram:bag &quot;:0.000000
+1gram:&quot;:0.000000
+2gram:&quot; security:0.000000
+3gram:&quot; security guards:0.000000
+3gram:bag &quot; security:0.000000" class="bar"></span>
+<span>"</span>
+</div>
+
+<div style="height:2.13075609763em" class="bars">
+<span style="height:2.13075609763em" title="Sentiment:
+3gram:bag &quot; security:0.000000
+2gram:&quot; security:0.000000
+1gram:security:-2.030756
+2gram:security guards:-0.000000
+3gram:security guards &quot;:0.000000
+3gram:&quot; security guards:0.000000" class="bar"></span>
+<span style="height:0em" title="Price range:
+3gram:bag &quot; security:0.000000
+2gram:&quot; security:0.000000
+1gram:security:2.470729
+2gram:security guards:-0.295932
+3gram:security guards &quot;:0.000000
+3gram:&quot; security guards:0.000000" class="bar"></span>
+<span>security</span>
+</div>
+
+<div style="height:2.95374779916em" class="bars">
+<span style="height:2.95374779916em" title="Sentiment:
+3gram:&quot; security guards:0.000000
+2gram:security guards:-0.000000
+1gram:guards:-2.853748
+2gram:guards &quot;:0.000000
+3gram:guards &quot; *:0.000000
+3gram:security guards &quot;:0.000000" class="bar"></span>
+<span style="height:0.53001527439em" title="Price range:
+3gram:&quot; security guards:0.000000
+2gram:security guards:-0.295932
+1gram:guards:-0.134083
+2gram:guards &quot;:0.000000
+3gram:guards &quot; *:0.000000
+3gram:security guards &quot;:0.000000" class="bar"></span>
+<span>guards</span>
+</div>
+
+<div style="height:0.1em" class="bars">
+<span style="height:0.1em" title="Sentiment:
+3gram:security guards &quot;:0.000000
+2gram:guards &quot;:0.000000
+1gram:&quot;:0.000000
+2gram:&quot; *:0.000000
+3gram:&quot; * *:0.000000
+3gram:guards &quot; *:0.000000" class="bar"></span>
+<span style="height:0.1em" title="Price range:
+3gram:security guards &quot;:0.000000
+2gram:guards &quot;:0.000000
+1gram:&quot;:0.000000
+2gram:&quot; *:0.000000
+3gram:&quot; * *:0.000000
+3gram:guards &quot; *:0.000000" class="bar"></span>
+<span>"</span>
+</div>
+
+</div>
+
+</body>
+</html>

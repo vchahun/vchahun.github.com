@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf8">
+<style>
+    body {
+        font: 8pt Monaco, Consolas, monospace;
+    }
+    span.point {
+        position:absolute;
+        top:0;
+        left:0;
+        background: rgba(255, 255, 255, 0.6);
+        -webkit-transform-origin: 0 0;
+        -moz-transform-origin: 0 0;
+        transform-origin: 0 0;
+    }
+    span.point:hover {
+        font-size: 12pt;
+        z-index:1;
+        background: rgb(255, 255, 155);
+    }
+    span.center {
+        font-size:12pt;
+        background:#888;
+        border-radius:10px;
+        width: 10px;
+        height: 10px;
+    }
+    span._1gram {
+        color: #077F7D;
+    }
+    span._2gram {
+        color: #DC5126;
+    }
+    span._3gram {
+        color: #EEA018;
+    }
+
+    input {
+        border: 1px solid #aaa;
+    }
+
+</style>
+<script>
+// Adapted from http://brenocon.com/colors/out2-explorer.html
+function filter(query) {
+    var q = query.replace(/^ */,'').replace(/ *$/,'');
+    var r = new RegExp(q,"i");
+    var empty = q.match(/^ *$/);
+    var points = document.getElementsByClassName("point");
+    Array.prototype.forEach.call(points, function(point) {
+        if(point.classList.contains("center")) return;
+        point.style.visibility = (empty || point.innerHTML.match(r) ? 'visible' : 'hidden');
+    });
+}
+</script>
+</head>
+<body>
+<div>Filter: <input type="text" onkeyup="filter(this.value)"/></div>
+<span class="point center" data-transform="450 450 0"></span>
+<span class="point _1gram" data-transform="425.834334472 1349.67550851 0.0268539669174">worst</span>
+<span class="point _1gram" data-transform="470.300925189 1261.10660069 6.25816185441">terrible</span>
+<span class="point _1gram" data-transform="-286.295578358 379.611328765 -1.47548757729">counter</span>
+<span class="point _1gram" data-transform="217.968068102 -219.201960049 -0.333758095509">gem</span>
+<span class="point _1gram" data-transform="455.964965775 1129.89743071 6.27441220043">awful</span>
+<span class="point _1gram" data-transform="458.36056774 1094.96091424 6.27022312713">disgusting</span>
+<span class="point _1gram" data-transform="807.208301582 977.390605325 5.68784861105">overpriced</span>
+<span class="point _1gram" data-transform="-169.072091322 437.80391406 -1.5510982841">inexpensive</span>
+<span class="point _1gram" data-transform="576.054756778 995.026682359 6.05589985293">worse</span>
+<span class="point _2gram" data-transform="631.392612229 964.700971763 5.944353284">not worth</span>
+<span class="point _1gram" data-transform="682.923309068 931.758436895 5.83283621571">mediocre</span>
+<span class="point _1gram" data-transform="961.404342277 582.928892454 4.9666906675">pasta</span>
+<span class="point _1gram" data-transform="511.043237346 928.605438506 6.1563262706">horrible</span>
+<span class="point _1gram" data-transform="489.920021647 889.965137627 6.19269857157">rude</span>
+<span class="point _1gram" data-transform="671.26738628 78.2653410323 0.536904298977">amazing</span>
+<span class="point _3gram" data-transform="442.638977688 20.8543745384 -0.017151055707">love this place</span>
+<span class="point _1gram" data-transform="46.8872786447 574.612805976 1.27098781215">rice</span>
+<span class="point _3gram" data-transform="364.269769597 43.3632331038 -0.207784651814">ca n&#39;t wait</span>
+<span class="point _1gram" data-transform="580.762730243 66.2821533514 0.328436027228">incredible</span>
+<span class="point _1gram" data-transform="419.311138315 850.651700038 0.0764480802456">edible</span>
+<span class="point _2gram" data-transform="327.150005659 75.1177320016 -0.316674605024">great food</span>
+<span class="point _1gram" data-transform="828.792456251 525.418625769 4.90892166654">calamari</span>
+<span class="point _1gram" data-transform="511.306257925 831.226175342 6.12373709893">flavorless</span>
+<span class="point _1gram" data-transform="487.360226426 74.1945854239 0.09908817567">awesome</span>
+<span class="point _1gram" data-transform="502.319375747 823.865191946 6.14414642682">tasteless</span>
+<span class="point _1gram" data-transform="738.807820113 216.792987195 0.891510027815">everyone</span>
+<span class="point _2gram" data-transform="303.790511964 110.757386302 -0.406931566122">super friendly</span>
+<span class="point _2gram" data-transform="365.798852458 101.51478583 -0.237076593607">hands down</span>
+<span class="point _2gram" data-transform="411.849331356 98.0008278129 -0.107961417255">n&#39;t wait</span>
+<span class="point _1gram" data-transform="519.763382301 103.041868505 0.198425608998">highly</span>
+<span class="point _2gram" data-transform="587.083671138 770.74013039 5.87928533714">no flavor</span>
+<span class="point _2gram" data-transform="439.980881237 104.47395823 -0.0289885881591">highly recommend</span>
+<span class="point _1gram" data-transform="778.382677812 549.824874881 5.00750180474">bar</span>
+<span class="point _1gram" data-transform="256.896846929 733.179350663 0.598482346944">dirty</span>
+<span class="point _1gram" data-transform="752.080056656 611.821678009 5.20418034696">expensive</span>
+<span class="point _2gram" data-transform="189.031490373 228.832043266 -0.867761800433">very reasonable</span>
+<span class="point _2gram" data-transform="337.14743699 130.268987111 -0.339310200235">friendly staff</span>
+<span class="point _1gram" data-transform="787.96870226 423.977728355 1.49395184343">appetizer</span>
+<span class="point _1gram" data-transform="659.846284783 184.215143073 0.668326814741">fantastic</span>
+<span class="point _1gram" data-transform="288.912705314 154.807857973 -0.499538335081">go-to</span>
+<span class="point _2gram" data-transform="548.386142659 768.493996989 5.9835739138">should have</span>
+<span class="point _3gram" data-transform="335.891974281 147.07684035 -0.360251203214">definitely be back</span>
+<span class="point _1gram" data-transform="566.499332288 750.613902999 5.9134679175">waste</span>
+<span class="point _1gram" data-transform="756.02908152 535.118867522 4.98367188872">location</span>
+<span class="point _2gram" data-transform="382.6630651 758.612088774 0.214825880509">two stars</span>
+<span class="point _2gram" data-transform="445.54114802 762.114790055 0.0142849644634">never go</span>
+<span class="point _1gram" data-transform="429.191060347 756.688978034 0.067746468261">gross</span>
+<span class="point _1gram" data-transform="755.791047235 427.965024017 1.49886173038">wine</span>
+<span class="point _2gram" data-transform="469.621964783 144.267354642 0.064092238493">highly recommended</span>
+<span class="point _1gram" data-transform="640.725374925 688.974665083 5.60960475616">manager</span>
+<span class="point _1gram" data-transform="725.223455732 579.871365871 5.15328539574">hostess</span>
+<span class="point _1gram" data-transform="522.298004376 743.054343029 6.04131011164">poor</span>
+<span class="point _2gram" data-transform="746.390625689 416.065700883 1.45680088611">italian food</span>
+<span class="point _1gram" data-transform="378.277881572 164.863799854 -0.246424114057">perfection</span>
+<span class="point _1gram" data-transform="517.307810617 733.39290764 6.04999884255">meh</span>
+<span class="point _2gram" data-transform="411.691771972 732.893885182 0.134596807101">not good</span>
+<span class="point _1gram" data-transform="731.718232131 469.43871132 4.78128033072">scallops</span>
+<span class="point _2gram" data-transform="456.815709216 172.068884388 0.0245181019778">well worth</span>
+<span class="point _1gram" data-transform="533.765767792 185.049384973 0.306212267181">excellent</span>
+<span class="point _1gram" data-transform="380.330010496 717.740086162 0.254569444728">inedible</span>
+<span class="point _1gram" data-transform="724.979531609 463.177523265 4.76027417992">fish</span>
+<span class="point _1gram" data-transform="712.649770962 515.484182783 4.95672876669">entrees</span>
+<span class="point _2gram" data-transform="276.500848757 243.114045021 -0.697851456962">little place</span>
+<span class="point _2gram" data-transform="266.953392133 254.961601489 -0.753691611428">friendly service</span>
+<span class="point _1gram" data-transform="664.660182541 599.381746483 5.32035710178">waiter</span>
+<span class="point _2gram" data-transform="600.312754332 663.731699432 5.67026287869">mediocre food</span>
+<span class="point _3gram" data-transform="394.958518969 204.748294609 -0.220770447537">wait to go</span>
+<span class="point _2gram" data-transform="511.779174526 209.485044162 0.251426601512">5 stars</span>
+<span class="point _2gram" data-transform="458.911033452 203.830482322 0.036182970174">favorite place</span>
+<span class="point _2gram" data-transform="479.809422708 694.260697151 6.16174644433">never again</span>
+<span class="point _1gram" data-transform="693.964688319 451.854618087 4.71999082791">bartender</span>
+<span class="point _1gram" data-transform="232.367187883 346.318079415 -1.12620016095">behind</span>
+<span class="point _1gram" data-transform="215.808016192 487.52782621 1.41190330588">tea</span>
+<span class="point _1gram" data-transform="685.907228898 474.113809638 4.81425253452">seated</span>
+<span class="point _1gram" data-transform="610.44675268 620.778770073 5.52897033332">okay</span>
+<span class="point _3gram" data-transform="222.646199441 395.445906739 -1.33529634095">behind the counter</span>
+<span class="point _1gram" data-transform="341.636518884 243.385596432 -0.483033041091">beat</span>
+<span class="point _2gram" data-transform="233.74869696 363.652643156 -1.1909006766">cash only</span>
+<span class="point _1gram" data-transform="505.384112481 674.179413743 6.04098256268">stale</span>
+<span class="point _1gram" data-transform="358.024763194 661.198153967 0.410724315002">yuck</span>
+<span class="point _2gram" data-transform="540.823516638 654.878747746 5.86591392158">somewhere else</span>
+<span class="point _1gram" data-transform="508.467899962 665.71497276 6.0185021726">mess</span>
+<span class="point _1gram" data-transform="286.172247382 306.258677958 -0.850612610483">affordable</span>
+<span class="point _2gram" data-transform="391.815494229 240.271559935 -0.270621940059">five stars</span>
+<span class="point _1gram" data-transform="662.440350314 487.630805103 4.88770628986">pricey</span>
+<span class="point _3gram" data-transform="287.593156448 308.231623725 -0.853144915964">place is great</span>
+<span class="point _1gram" data-transform="465.058610538 664.254538446 6.21301695345">bland</span>
+<span class="point _2gram" data-transform="358.642492244 256.448011341 -0.441001856078">great little</span>
+<span class="point _2gram" data-transform="475.126249536 662.0279045 6.16523096389">tasted like</span>
+<span class="point _2gram" data-transform="581.56098453 615.079584958 5.61030389177">nothing special</span>
+<span class="point _2gram" data-transform="582.751979714 611.778744863 5.59602251065">n&#39;t even</span>
+<span class="point _1gram" data-transform="420.632012648 244.570076372 -0.141996543549">heaven</span>
+<span class="point _1gram" data-transform="637.609818093 529.083311874 5.11131749658">hour</span>
+<span class="point _1gram" data-transform="251.233502885 484.464582996 1.3991109981">yeah</span>
+<span class="point _3gram" data-transform="587.588645134 596.953330154 5.53068670472">mediocre at best</span>
+<span class="point _1gram" data-transform="554.841657686 280.064753869 0.552790055553">wonderful</span>
+<span class="point _2gram" data-transform="348.271450276 278.732423162 -0.535977103882">always fresh</span>
+<span class="point _1gram" data-transform="640.573594436 393.184732208 1.28105812072">italian</span>
+<span class="point _2gram" data-transform="263.837791096 382.317931599 -1.2220883305">tasty food</span>
+<span class="point _2gram" data-transform="512.911224083 262.707156876 0.32405665267">even better</span>
+<span class="point _3gram" data-transform="600.976573998 328.653470407 0.893776566745">probably the best</span>
+<span class="point _3gram" data-transform="370.70011258 274.218217483 -0.423790646664">just the right</span>
+<span class="point _1gram" data-transform="401.959249772 636.170326674 0.252538134994">nasty</span>
+<span class="point _1gram" data-transform="409.970433536 638.04316262 0.209743544074">avoid</span>
+<span class="point _1gram" data-transform="287.945674476 349.686773337 -1.01651612316">hole</span>
+<span class="point _1gram" data-transform="289.911266663 351.331553052 -1.01845158898">owner</span>
+<span class="point _1gram" data-transform="265.123140366 415.818208492 -1.3879713988">cheap</span>
+<span class="point _2gram" data-transform="636.679144483 431.390444067 1.47143720269">wine list</span>
+<span class="point _2gram" data-transform="605.409441351 553.055426237 5.29793359737">happy hour</span>
+<span class="point _2gram" data-transform="623.733018358 512.214376651 5.05626450528">wait staff</span>
+<span class="point _2gram" data-transform="438.965009656 634.080815775 0.0598747912208">2 stars</span>
+<span class="point _1gram" data-transform="281.197930309 378.438679826 -1.16982701122">neighborhood</span>
+<span class="point _2gram" data-transform="329.240658996 313.28859947 -0.723520472396">been coming</span>
+<span class="point _3gram" data-transform="404.549378602 623.951985575 0.25556903861">avoid this place</span>
+<span class="point _1gram" data-transform="289.525248991 369.853598578 -1.10760234535">village</span>
+<span class="point _2gram" data-transform="368.794195675 607.823209145 0.475209078994">not bad</span>
+<span class="point _1gram" data-transform="549.249654589 596.197843185 5.68678023685">management</span>
+<span class="point _2gram" data-transform="467.312945075 623.858932337 6.1839321001">not even</span>
+<span class="point _2gram" data-transform="298.258497747 535.356699414 1.05839633158">quick bite</span>
+<span class="point _2gram" data-transform="493.538583233 618.007181017 6.0296162562">pretty bad</span>
+<span class="point _1gram" data-transform="494.043013993 615.072473599 6.02244894832">charged</span>
+<span class="point _1gram" data-transform="612.85913408 490.775129362 4.95771635673">party</span>
+<span class="point _1gram" data-transform="295.79001739 513.562466276 1.17983316182">guy</span>
+<span class="point _2gram" data-transform="458.978192721 615.150739452 6.22887514379">bad reviews</span>
+<span class="point _1gram" data-transform="404.258534961 607.89843879 0.281970665638">lukewarm</span>
+<span class="point _2gram" data-transform="287.064154233 431.174827543 -1.45576901661">less than</span>
+<span class="point _2gram" data-transform="444.087161683 288.953346661 -0.0366985808979">very friendly</span>
+<span class="point _1gram" data-transform="590.198215382 370.707540949 1.05607482321">offers</span>
+<span class="point _3gram" data-transform="422.915245427 608.257012655 0.169501914282">never go back</span>
+<span class="point _1gram" data-transform="609.259153817 450.961650029 4.71842717862">lobster</span>
+<span class="point _1gram" data-transform="448.133626729 292.7020042 -0.0118646501764">favorite</span>
+<span class="point _1gram" data-transform="606.438999805 439.388876164 1.5030709167">pesto</span>
+<span class="point _1gram" data-transform="420.507830251 296.197338559 -0.18945362389">yum</span>
+<span class="point _2gram" data-transform="326.420459869 355.967818085 -0.920353025082">small place</span>
+<span class="point _1gram" data-transform="570.712753828 353.293894983 0.8953692802">space</span>
+<span class="point _1gram" data-transform="603.366704156 459.217598942 4.77241846553">ravioli</span>
+<span class="point _1gram" data-transform="508.815798402 309.514285833 0.396488677115">die</span>
+<span class="point _1gram" data-transform="599.654638273 427.852873483 1.42387444897">seafood</span>
+<span class="point _1gram" data-transform="300.72479322 472.138689781 1.42356167152">across</span>
+<span class="point _2gram" data-transform="434.286160844 300.121987986 -0.10446254677">delicious food</span>
+<span class="point _1gram" data-transform="425.880698627 303.148313144 -0.162789193064">favorites</span>
+<span class="point _1gram" data-transform="547.211927158 337.386210772 0.712126452085">outstanding</span>
+<span class="point _3gram" data-transform="558.480094011 551.664643189 5.46536633316">food is decent</span>
+<span class="point _3gram" data-transform="543.067254809 565.833278783 5.60633896092">okay , but</span>
+<span class="point _2gram" data-transform="429.312138018 303.014096247 -0.139828753205">hidden gem</span>
+<span class="point _2gram" data-transform="348.482956352 558.114239785 0.753938071242">taste like</span>
+<span class="point _2gram" data-transform="524.992159358 576.259025995 5.74722263566">waste your</span>
+<span class="point _1gram" data-transform="590.274863444 493.006342308 5.00987718612">tip</span>
+<span class="point _1gram" data-transform="536.163192241 567.824819671 5.65177161292">ugh</span>
+<span class="point _1gram" data-transform="499.191643291 313.373294607 0.345594647046">fabulous</span>
+<span class="point _1gram" data-transform="305.580352506 457.023173224 1.522204291">working</span>
+<span class="point _1gram" data-transform="592.699283304 446.208951733 1.5442358798">hotel</span>
+<span class="point _2gram" data-transform="415.359849145 312.144420418 -0.246181646659">excellent food</span>
+<span class="point _2gram" data-transform="490.818936883 585.400724207 5.99038259777">negative reviews</span>
+<span class="point _1gram" data-transform="588.839747924 453.491208526 4.73752928081">midtown</span>
+<span class="point _1gram" data-transform="350.124502413 545.53708556 0.807595809886">health</span>
+<span class="point _3gram" data-transform="536.686368053 556.105552602 5.59817468756">write home about</span>
+<span class="point _3gram" data-transform="336.269449448 375.802343279 -0.992736738195">prices are very</span>
+<span class="point _1gram" data-transform="483.784750808 581.373077769 6.03147318616">2.5</span>
+<span class="point _3gram" data-transform="539.078355574 547.156858065 5.54113792092">nothing to write</span>
+<span class="point _3gram" data-transform="515.439701241 560.969622343 5.75036764404">n&#39;t waste your</span>
+<span class="point _1gram" data-transform="577.510191562 443.848658899 1.52259174251">olive</span>
+<span class="point _2gram" data-transform="396.364321109 335.558459863 -0.438273564854">new favorite</span>
+<span class="point _2gram" data-transform="534.588948464 541.169247663 5.53520916652">not impressed</span>
+<span class="point _1gram" data-transform="474.005892801 329.126875671 0.196052946767">welcoming</span>
+<span class="point _1gram" data-transform="329.468709837 427.807220112 -1.38871108933">kind</span>
+<span class="point _2gram" data-transform="525.535972103 545.228143035 5.61259797794">home about</span>
+<span class="point _3gram" data-transform="490.213158027 564.602655404 5.9457160303">food was n&#39;t</span>
+<span class="point _2gram" data-transform="571.222829457 446.387862206 1.54100763668">but what</span>
+<span class="point _2gram" data-transform="530.27808999 539.952129381 5.5545552387">but nothing</span>
+<span class="point _1gram" data-transform="568.757674975 469.992367592 4.87917105952">mussels</span>
+<span class="point _2gram" data-transform="385.292484797 348.615423849 -0.568062373801">by far</span>
+<span class="point _1gram" data-transform="551.197056285 386.369909244 1.00948763462">enjoy</span>
+<span class="point _1gram" data-transform="417.705618467 564.034399423 0.275972288006">blah</span>
+<span class="point _1gram" data-transform="485.694749156 562.232961062 5.97525986984">money</span>
+<span class="point _2gram" data-transform="567.610572966 449.807261652 1.56915754407">would have</span>
+<span class="point _1gram" data-transform="562.372884183 483.24339565 5.00001673519">arrived</span>
+<span class="point _1gram" data-transform="341.321646397 415.078715346 -1.25989014801">roll</span>
+<span class="point _1gram" data-transform="432.376054429 560.53296894 0.158114212881">starving</span>
+<span class="point _2gram" data-transform="419.278573928 556.879814033 0.279893471843">not very</span>
+<span class="point _1gram" data-transform="341.875182575 426.062153554 -1.35291975841">chicago</span>
+<span class="point _1gram" data-transform="522.19506662 367.030999497 0.71607367916">classic</span>
+<span class="point _1gram" data-transform="415.06770598 346.239188596 -0.324743112132">yummy</span>
+<span class="point _3gram" data-transform="359.045137934 389.363425289 -0.982793723247">ca n&#39;t beat</span>
+<span class="point _1gram" data-transform="518.33383164 535.042897287 5.60630054253">ok</span>
+<span class="point _3gram" data-transform="387.105808221 362.47066676 -0.623067363624">food is great</span>
+<span class="point _2gram" data-transform="424.967882887 345.503690217 -0.235119681865">must try</span>
+<span class="point _1gram" data-transform="471.527931504 345.670056708 0.20348872896">family</span>
+<span class="point _1gram" data-transform="510.252867989 534.82358211 5.66555900788">paid</span>
+<span class="point _2gram" data-transform="441.777472451 346.631579932 -0.0793786951453">definitely worth</span>
+<span class="point _1gram" data-transform="355.280244716 485.976857067 1.2078029269">burrito</span>
+<span class="point _2gram" data-transform="376.413728598 383.033222294 -0.832459441289">reasonably priced</span>
+<span class="point _2gram" data-transform="410.306693826 541.051436101 0.411103481406">just not</span>
+<span class="point _1gram" data-transform="534.889080059 501.381598623 5.25668124199">30</span>
+<span class="point _2gram" data-transform="420.392670695 544.453636866 0.30375818163">been sitting</span>
+<span class="point _1gram" data-transform="536.934256063 495.581508942 5.19530402213">upstairs</span>
+<span class="point _1gram" data-transform="451.572721328 353.538457476 0.016302683468">secret</span>
+<span class="point _1gram" data-transform="354.547723757 456.832767269 1.49933514629">hanging</span>
+<span class="point _1gram" data-transform="399.036778345 370.225724846 -0.568491820717">quaint</span>
+<span class="point _2gram" data-transform="371.796940354 397.864626903 -0.982793723247">n&#39;t beat</span>
+<span class="point _1gram" data-transform="503.084723845 372.789456384 0.602309113693">cozy</span>
+<span class="point _1gram" data-transform="501.697350338 372.203403966 0.58651458762">helpful</span>
+<span class="point _2gram" data-transform="420.016382161 362.156784711 -0.328931156653">how good</span>
+<span class="point _2gram" data-transform="507.468964666 522.679390958 5.61412927769">write home</span>
+<span class="point _1gram" data-transform="446.91425888 541.048093322 0.0338783643962">zero</span>
+<span class="point _1gram" data-transform="489.491623552 368.228538742 0.449915764079">phenomenal</span>
+<span class="point _1gram" data-transform="536.761082319 424.308499671 1.28290498349">wait</span>
+<span class="point _1gram" data-transform="456.592328313 538.472453705 6.20880997362">sub-par</span>
+<span class="point _2gram" data-transform="400.114440361 522.956705384 0.599749658067">decent food</span>
+<span class="point _1gram" data-transform="537.935942601 457.860975175 4.80154632434">pastas</span>
+<span class="point _2gram" data-transform="480.844518337 532.625200098 5.92590023816">n&#39;t waste</span>
+<span class="point _1gram" data-transform="463.933221066 364.438701156 0.161427911962">recommended</span>
+<span class="point _1gram" data-transform="364.798191533 464.469625572 1.40257365302">clean</span>
+<span class="point _1gram" data-transform="466.867700552 534.662930825 6.08652677825">sucks</span>
+<span class="point _3gram" data-transform="468.014316858 533.374246737 6.07039073452">n&#39;t be back</span>
+<span class="point _1gram" data-transform="365.800806943 447.07641699 -1.53608804954">mexican</span>
+<span class="point _3gram" data-transform="394.003906705 512.913965751 0.7272863134">food is n&#39;t</span>
+<span class="point _1gram" data-transform="367.781594472 437.041564545 -1.41447236111">spanish</span>
+<span class="point _1gram" data-transform="371.361728639 428.221244788 -1.30061946866">egg</span>
+<span class="point _2gram" data-transform="457.117598909 530.676531828 6.19518923197">our order</span>
+<span class="point _2gram" data-transform="369.244098598 452.504851217 1.5397887058">stopped by</span>
+<span class="point _2gram" data-transform="525.411813735 471.02107387 4.9842385619">caesar salad</span>
+<span class="point _2gram" data-transform="527.562436489 451.49402741 4.73164885334">more expensive</span>
+<span class="point _1gram" data-transform="485.234331423 382.900959633 0.483532696447">extensive</span>
+<span class="point _2gram" data-transform="483.814357194 515.816510976 5.80858478401">food poisoning</span>
+<span class="point _2gram" data-transform="455.670859608 522.552418836 6.2051816589">bad service</span>
+<span class="point _1gram" data-transform="433.034139846 520.583343823 0.235891341763">sick</span>
+<span class="point _2gram" data-transform="403.488882046 395.48950647 -0.706378251072">great neighborhood</span>
+<span class="point _1gram" data-transform="380.140776668 434.886127776 -1.35773250679">hot</span>
+<span class="point _1gram" data-transform="399.302088469 499.611291992 0.796230439997">hungry</span>
+<span class="point _1gram" data-transform="383.969176106 429.369397747 -1.26796706454">sandwiches</span>
+<span class="point _1gram" data-transform="405.950657586 397.579710533 -0.698842098761">stumbled</span>
+<span class="point _1gram" data-transform="480.480917624 511.298746057 5.82173859813">poisoning</span>
+<span class="point _3gram" data-transform="395.849709771 408.792696005 -0.920304785135">service is friendly</span>
+<span class="point _1gram" data-transform="513.061410366 463.516924478 4.9235393972">drink</span>
+<span class="point _1gram" data-transform="472.72119373 510.118567323 5.92183985355">overcooked</span>
+<span class="point _1gram" data-transform="492.319810936 497.654259233 5.55700654965">asked</span>
+<span class="point _2gram" data-transform="389.980576168 430.978750942 -1.26389139544">laid back</span>
+<span class="point _2gram" data-transform="396.641893588 418.217372439 -1.03358327302">reasonable price</span>
+<span class="point _1gram" data-transform="443.252779634 389.596016376 -0.111240450654">superb</span>
+<span class="point _1gram" data-transform="431.835468082 392.007530447 -0.303542727803">discovered</span>
+<span class="point _2gram" data-transform="472.995987941 397.823085973 0.415119213825">great service</span>
+<span class="point _1gram" data-transform="456.914407682 394.38205424 0.123685128629">regulars</span>
+<span class="point _2gram" data-transform="485.002442721 406.440851549 0.676908652215">perfectly cooked</span>
+<span class="point _2gram" data-transform="446.09255641 505.407712413 0.070405094273">not go</span>
+<span class="point _2gram" data-transform="486.033628216 492.17237587 5.57612110767">definitely not</span>
+<span class="point _1gram" data-transform="401.179920016 475.115958371 1.09564807301">ketchup</span>
+<span class="point _2gram" data-transform="420.173749517 404.812423737 -0.583410775451">best place</span>
+<span class="point _1gram" data-transform="401.050448366 429.034440919 -1.16612582706">byob</span>
+<span class="point _1gram" data-transform="412.319411605 414.059283611 -0.809026489599">unassuming</span>
+<script>
+var points = document.getElementsByClassName("point");
+Array.prototype.forEach.call(points, function(point) {
+    var transform = point.attributes["data-transform"].value.split(" ");
+    var x = parseInt(transform[0]);
+    var y = parseInt(transform[1]);
+    var r = parseFloat(transform[2]);
+    transform = "translateX("+x+"px) translateY("+y+"px) rotate("+r+"rad)";
+    if("webkitTransform" in point.style)
+        point.style.webkitTransform = transform;
+    else if("MozTransform" in point.style)
+        point.style.MozTransform = transform;
+    else if("transform" in point.style)
+        point.style.transform = transform;
+});
+</script>
+</body>
+</html>

@@ -143,3 +143,36 @@ table ~ figcaption:before,
     margin: 0 auto;
     text-align: center;
 }
+
+#global-stats {
+    font-size: 0.75em;
+    font-family: "Helvetica Neue";
+    text-align: center;
+}
+
+#global-stats div {
+    display: inline-block;
+}
+
+#global-stats rect {
+    fill: #258;
+}
+
+#global-stats .stars {
+    fill: white;
+}
+
+#global-stats .pr {
+    font-weight: bold;
+}
+
+#sentence-bars iframe, #joint iframe {
+    width: 940px;
+    border: none;
+    height: 750px;
+    margin-left: -2em;
+}
+
+#MathJax_Message {
+    display: none;
+}
