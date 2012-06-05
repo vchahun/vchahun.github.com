@@ -1,0 +1,113 @@
+body {
+    font: 110% Palatino;
+    line-height: 1.4em;
+    text-align: justify;
+    background: #aaa;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #700;
+}
+
+span.textsc {
+    font-variant: small-caps;
+}
+
+article {
+    width: 860px;
+    margin: auto;
+    background: white;
+    padding: 0 100px;
+    box-shadow: 0 0 10px black;
+    height: 100%;
+    counter-reset: section figure table;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+    line-height: 5em;
+}
+
+h2 {
+    counter-reset: subsection;
+}
+
+h2:before {
+    counter-increment: section;
+    content: counter(section) " ";
+}
+
+h3:before {
+    counter-increment: subsection;
+    content: counter(section) "." counter(subsection) " ";
+}
+
+#acknowledgments h2:before,
+#conclusion h2:before,
+#references h2:before {
+    content: "";
+}
+
+h4 {
+    float: left;
+    margin: 0;
+}
+
+figure table {
+    margin: auto;
+}
+
+figcaption {
+    margin-top: 1em;
+    text-align: center;
+    font-size: 90%;
+}
+
+table ~ figcaption:before {
+    counter-increment: table;
+    content: "Table " counter(table) ": ";
+}
+
+.figure ~ figcaption:before {
+    counter-increment: figure;
+    content: "Figure " counter(figure) ": ";
+}
+
+td {
+    padding: 0 0.2em;
+}
+
+#authors {
+    margin: 0em 2em 2em;
+    text-align: center;
+}
+
+#authors span {
+    line-height: 2em;
+    font-weight: bold;
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+#abstract {
+    font-size: 90%;
+    padding: 0 5em;
+}
+
+#abstract h2 {
+    text-align: center;
+}
+
+section p {
+    text-indent: 1em;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+section p:nth-child(2) {
+    text-indent: 0
+}
