@@ -87,6 +87,19 @@ nav a {
     font: 90% Monaco, Consolas, monospace;
 }
 
+#publications ul {
+    padding-left: 0;
+}
+
+#publications li {
+    list-style-type: none;
+    line-height: 1.25em;
+}
+
+#publications li a:nth-child(1) {
+    color: #28D;
+}
+
 /* Resume */
 
 #printinfo {
