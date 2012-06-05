@@ -138,12 +138,38 @@ span.courses {
 }
 
 @media screen and (max-width:960px) {
-    div#home.content {
-        width: 300px;
+    div#home, div#publications {
+        width: 700px;
     }
 
-    #home #email, #home nav, #home #research {
-        position: initial;
+    #home #email {
+        bottom: 25px;
+        left: 340px;
+    }
+
+    #home h2 {
+        position: absolute;
+        bottom: 60px;
+        left: 340px;
+    }
+}
+
+@media screen and (max-width:760px) {
+    div#home {
+        margin: 0 auto;
+    }
+
+    div#home, div#publications {
+        width: 300px;
+        padding: 10px;
+    }
+
+    div#id {
+        margin: 0;
+    }
+
+    #home #email, #home nav, #home #research, #home h2 {
+        position: static;
     }
 
     #home h3 {

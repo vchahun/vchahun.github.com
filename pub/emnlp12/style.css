@@ -166,8 +166,8 @@ table ~ figcaption:before,
 }
 
 #sentence-bars iframe, #joint iframe {
-    width: 940px;
     border: none;
+    width: 940px;
     height: 750px;
     margin-left: -40px;
 }
