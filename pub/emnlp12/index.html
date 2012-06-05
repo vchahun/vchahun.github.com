@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf8">
     <title>Word Salad: Relating Food Prices and Descriptions</title>
     <script src="mathjax/MathJax.js?config=TeX-AMS_HTML"></script>
     <link rel="stylesheet" href="style.css"/>
@@ -10,11 +11,11 @@
 <header>
 <h1>Word Salad: Relating Food Prices and Descriptions</h1>
 <section id="authors">
-<span>Victor Chahuneau</span>
-<span>Kevin Gimpel</span>
-<span>Bryan R. Routledge</span>
-<span>Lily Scherlis</span>
-<span>Noah A. Smith</span>
+<a href="/">Victor Chahuneau</a>
+<a href="http://cs.cmu.edu/~kgimpel">Kevin Gimpel</a>
+<a href="http://sulawesi.gsia.cmu.edu">Bryan R. Routledge</a>
+<a href="#">Lily Scherlis</a>
+<a href="http://cs.cmu.edu/~nasmith">Noah A. Smith</a>
 </section>
 </header>
 <section id="abstract">
@@ -31,7 +32,7 @@
 <section id="related">
 <h2>Related Work</h2>
 <p>There are several areas of related work scattered throughout linguistics, NLP, hospitality research, and economics.</p>
-<p><span class="citation">(Freedman and Jurafsky 2011)</span> studied the use of language in food advertising, specifically the words on potato chip bags. They argued that, due to the ubiquity of food writing across cultures, ethnic groups, and social classes, studying the use of language for describing food can provide perspective on how different socioeconomic groups self-identify using language and how they are linguistically targeted. In particular, they showed that price affects how <q>authenticity</q> is realized in marketing language, a point we return to in §[sec:item-price-pred]. This is an example of how price can affect how an underlying variable is expressed in language. Among other explorations in this paper, we consider how price interacts with expression of sentiment in user reviews of restaurants.</p>
+<p><span class="citation">(Freedman and Jurafsky 2011)</span> studied the use of language in food advertising, specifically the words on potato chip bags. They argued that, due to the ubiquity of food writing across cultures, ethnic groups, and social classes, studying the use of language for describing food can provide perspective on how different socioeconomic groups self-identify using language and how they are linguistically targeted. In particular, they showed that price affects how <q>authenticity</q> is realized in marketing language, a point we return to in <a href="#item-price-pred">§5</a>. This is an example of how price can affect how an underlying variable is expressed in language. Among other explorations in this paper, we consider how price interacts with expression of sentiment in user reviews of restaurants.</p>
 <p>As mentioned above, our work is related to research in predicting real-world quantities using text data <span class="citation">(Koppel and Shtrimberg 2006; Ghose, Ipeirotis, and Sundararajan 2007; Lerman et al. 2008; Kogan et al. 2009; Joshi et al. 2010; Eisenstein et al. 2010; Eisenstein, Smith, and Xing 2011; Yogatama et al. 2011)</span>. Like much of this prior work, we aim to learn how language is used in a specific context while building models that achieve competitive performance on a quantitative prediction task.</p>
 <p>Along these lines, there is recent interest in exploring the relationship between product sales and user-generated text, particularly online product reviews. For example, <span class="citation">(Ghose and Ipeirotis 2011)</span> studied the sales impact of particular properties of review text, such as readability, the presence of spelling errors, and the balance between subjective and objective statements. <span class="citation">(Archak, Ghose, and Ipeirotis 2011)</span> had a similar goal but decomposed user reviews into parts describing particular aspects of the product being reviewed <span class="citation">(Hu and Liu 2004)</span>. Our paper differs from price modeling based on product reviews in several ways. We consider a large set of weakly-related products instead of a homogeneous selection of a few products, and the reviews in our dataset are not product-centered but rather describe the overall experience of visiting a restaurant. Consequently, menu items are not always mentioned in reviews and rarely appear with their exact names. This makes it difficult to directly use review features in a pricing model for individual menu items.</p>
 <p>Menu planning and pricing has been studied for many years by the culinary and hospitality research community <span class="citation">(Kasavana and Smith 1982; Kelly, Kiefer, and Burdett 1994)</span>, often including recommendations for writing menu item descriptions <span class="citation">(Miller and Pavesic 1996; McVety, Ware, and Ware 2008)</span>. Their guidelines frequently include example menus from successful restaurants, but typically do not use large corpora of menus or automated analysis, as we do here. Other work focused more specifically on particular aspects of the language used on menus, such as the study by <span class="citation">(A. D. Zwicky and Zwicky 1980)</span>, who made linguistic observations through manual analysis of a corpus of 200 menus.</p>
@@ -42,13 +43,13 @@
 <h2>Data</h2>
 <p>We crawled <a href="www.allmenus.com">Allmenus.com</a> to gather menus for restaurants in seven U.S. cities: Boston, Chicago, Los Angeles, New York, Philadelphia, San Francisco, and Washington, D.C. Each menu includes a list of item names with optional text descriptions and prices. Most Allmenus restaurant pages contain a link to the corresponding page on <a href="www.yelp.com">Yelp</a> with metadata and user reviews for the restaurant, which we also collected.</p>
 <p>The metadata consist of many fields for each restaurant, which can be divided into three categories: location (city, neighborhood, transit stop), services available (take-out, delivery, wifi, parking, etc.), and ambience (good for groups, noise level, attire, etc.). Also, the category of food and a price range (<span class="tex2jax_ignore">$ to $$$$</span>, indicating the price of a typical meal at the restaurant) are indicated. The user reviews include a star rating on a scale of 1 to 5.</p>
-<p>The distribution of prices of individual menu items is highly skewed, with a mean of $9.22 but a median of $6.95. On average, a restaurant has 73 items on its menu with a median price of $8.69 and 119 Yelp reviews with a median rating of 3.55 stars. The star rating and price range distributions are shown in Figure [fig:global-stats].</p>
+<p>The distribution of prices of individual menu items is highly skewed, with a mean of $9.22 but a median of $6.95. On average, a restaurant has 73 items on its menu with a median price of $8.69 and 119 Yelp reviews with a median rating of 3.55 stars. The star rating and price range distributions are shown in Figure <a href="#global-stats">1</a>.</p>
 <figure id="global-stats">
 <div class="figure">
 </div>
 <figcaption>Frequency distributions of restaurant price ranges (left) and review ratings (right).</figcaption>
 </figure>
-<p>The set of restaurants was randomly split into three parts (80% for training, 10% for development, 10% for evaluation), independently for each city. The sizes of the splits and the full set of dataset statistics are provided in Table [tab:data].</p>
+<p>The set of restaurants was randomly split into three parts (80% for training, 10% for development, 10% for evaluation), independently for each city. The sizes of the splits and the full set of dataset statistics are provided in Table <a href="#data">1</a>.</p>
 <figure id="data-stats">
 <table style="text-align:right">
 <thead>
@@ -73,7 +74,7 @@
 </section>
 <section id="tasks">
 <h2>Predictive Tasks</h2>
-<p>We consider several prediction tasks using the dataset just described. These include predicting <strong>individual menu item prices</strong> (§[sec:item-price-pred]), predicting the <strong>price range</strong> for each restaurant (§[sec:price-range-pred]), and finally jointly predicting <strong>median price and sentiment</strong> for each restaurant (§[sec:joint-pred]). To do this, we use two types of models: linear regression (§[sec:item-price-pred] and §[sec:price-range-pred]) and logistic regression (§[sec:joint-pred]), both with \(\ell_1\) regularization when sparsity is desirable. We tune the regularization coefficient by choosing the value that minimizes development set loss (mean squared error and log loss, respectively).</p>
+<p>We consider several prediction tasks using the dataset just described. These include predicting <strong>individual menu item prices</strong> (<a href="#item-price-pred">§5</a>), predicting the <strong>price range</strong> for each restaurant (<a href="#price-range-pred">§6</a>), and finally jointly predicting <strong>median price and sentiment</strong> for each restaurant (<a href="#joint-pred">§7</a>). To do this, we use two types of models: linear regression (<a href="#item-price-pred">§5</a> and <a href="#price-range-pred">§6</a>) and logistic regression (<a href="#joint-pred">§7</a>), both with \(\ell_1\) regularization when sparsity is desirable. We tune the regularization coefficient by choosing the value that minimizes development set loss (mean squared error and log loss, respectively).</p>
 <p>For evaluation, we use mean absolute error (MAE) and mean relative error (MRE). Given a dataset \(\langle \boldsymbol{x}_i, y_i\rangle_{i=1}^N\) with inputs \(\boldsymbol{x}_i\) and outputs \(y_i\), and denoting predicted outputs by \(\hat{y}_i\), these are defined as follows:</p>
 <p>\[\begin{aligned}
 \mathrm{MAE} &amp; = \frac{1}{N} \sum_{i=1}^N |y_i - \hat{y}_i|\\
@@ -85,7 +86,7 @@
 <h2>Menu Item Price Prediction</h2>
 <p>We first consider the problem of predicting the <strong>price</strong> of each item on a menu. In this case, every instance \(\boldsymbol{x}_i\) corresponds to a single item in the menu parametrized by the features detailed below and \(y_i\) is the item’s price. In this section, our models always use the logarithm of the price<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> as output values and therefore: \(\hat y_i = e^{\boldsymbol{w}^\top \boldsymbol{x}_i}\).</p>
 <h4 id="baselines">Baselines</h4>
-<p>We evaluate several baselines which make independent predictions for each distinct item name. The first two predict the mean or the median of the prices in the training set for a given item name, and use the overall price mean or median when a name is missing in the training set. The third baseline is an \(\ell_1\)-regularized linear regression model trained with a single binary feature for each item name in the training data. These baselines are shown as the first three rows in Table [tab:item-price-pred-results].</p>
+<p>We evaluate several baselines which make independent predictions for each distinct item name. The first two predict the mean or the median of the prices in the training set for a given item name, and use the overall price mean or median when a name is missing in the training set. The third baseline is an \(\ell_1\)-regularized linear regression model trained with a single binary feature for each item name in the training data. These baselines are shown as the first three rows in Table <a href="#item-price-pred-results">2</a>.</p>
 <p>We note that there is a wide variation of menu item names in the dataset, with more than 400,000 distinct names. Although we address this issue later by introducing local text features, we also performed simple normalization of the item names for all of the baselines described above. To do this normalization, we first compiled a stop word list based on the most frequent words in the item names.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup> We removed stop words and then ordered the words in each item name lexicographically, in order to collapse together items such as <em>coffee black</em> and <em>black coffee</em>. This normalization reduced the unique item name count by 40%, strengthening the baselines.</p>
 <h3 id="features">Features</h3>
 <p>We use \(\ell_1\)-regularized linear regression for feature-rich models. We now introduce several sets of features that we add to the normalized item names:<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup></p>
@@ -95,7 +96,7 @@
 <h4 id="review-features">Review Features</h4>
 <p>In addition to these features, we consider leveraging the large amount of text present in user reviews to improve predictions. We attempted to find mentions of menu items in the reviews and to include features extracted from the surrounding words in the model. Perfect item mentions being relatively rare, we consider inexact matches weighted by a coefficient measuring the degree of resemblance: we used the Dice similarity between the set of words in the sentence and in the item name. We then extracted \(n\)-gram features from this sentence, and tried several ways to use them for price prediction.</p>
 <p>Given a review sentence, one option is to add the corresponding features to every item matching this sentence, with a value equal to the similarity coefficient. Another option is to select the best matching item and use the same real-valued features but only for this single item. Binary feature values can be used instead of the real-valued similarity coefficient. We also experimented with the use of part-of-speech tags in order to restrict our features to adjective and adverb \(n\)-grams instead of the full vocabulary. All of these attempts yielded negative or only slightly positive results, of which we include only one example in our experiments: the <span class="textsc">Mentions</span> feature set consists of \(n\)-grams for the best matching item with the Dice coefficient as the feature value.</p>
-<p>We also tried to incorporate the reviews by using them in aggregate via predictions from a separate model; we found this approach to work better than the methods described above which all use features from the reviews directly in the regression model. In particular, we use the review features in a separate model that we will describe below (§[sec:price-range-pred]) to predict the price range of each restaurant. The model uses unigrams, bigrams, and trigrams extracted from the reviews. We use the estimated price range (which we denote \(\widehat{\mathrm{PR}}\)) as a single additional real-valued feature for individual item price prediction.</p>
+<p>We also tried to incorporate the reviews by using them in aggregate via predictions from a separate model; we found this approach to work better than the methods described above which all use features from the reviews directly in the regression model. In particular, we use the review features in a separate model that we will describe below (<a href="#price-range-pred">§6</a>) to predict the price range of each restaurant. The model uses unigrams, bigrams, and trigrams extracted from the reviews. We use the estimated price range (which we denote \(\widehat{\mathrm{PR}}\)) as a single additional real-valued feature for individual item price prediction.</p>
 <h3 id="results">Results</h3>
 <figure id="item-price-pred-results">
 <table>
@@ -183,17 +184,132 @@
 </table>
 <figcaption>Results for menu item price prediction. MAE = mean absolute error ($), MRE = mean relative error (%), nf = total number of features, nnz = number of features with non-zero weight.</figcaption>
 </figure>
-<p>Our results are shown in Table [tab:item-price-pred-results]. We achieve a final reduction of 50 cents in MAE and nearly 10% in MRE compared with the baselines. Using menu name features (\texsc{MenuNames}) brings the bulk of the improvement, though menu description features (<span class="textsc">MenuDesc</span>) and the remaining features also lead to small gains. Interestingly, as the <span class="textsc">MenuDesc</span> and \(\widehat{\mathrm{PR}}\) features are added to the model, the regularization favors more general features by selecting fewer and fewer non-zero weights.</p>
+<p>Our results are shown in Table <a href="#item-price-pred-results">2</a>. We achieve a final reduction of 50 cents in MAE and nearly 10% in MRE compared with the baselines. Using menu name features (\texsc{MenuNames}) brings the bulk of the improvement, though menu description features (<span class="textsc">MenuDesc</span>) and the remaining features also lead to small gains. Interestingly, as the <span class="textsc">MenuDesc</span> and \(\widehat{\mathrm{PR}}\) features are added to the model, the regularization favors more general features by selecting fewer and fewer non-zero weights.</p>
 <p>While <span class="textsc">Metadata</span> features improve over the baselines when used alone, they do not lead to improved performance over the <span class="textsc">Menu*</span> + \(\widehat{\mathrm{PR}}\) features, suggesting that the text features may be able to substitute for the information in the metadata, at least for prediction of individual item prices.</p>
 <p>The <span class="textsc">Mentions</span> features resulted in a small improvement in MAE and MRE, but at the cost of expanding the model size significantly. A look at the learned feature weights reveals that most of the selected features seem more coincidental than generic (<em>rachel’s</em>, highly negative) when not totally unintuitive (<em>those suicide</em>, highest positive). This suggests that our method of extracting features from mentions is being hampered by noise. We suspect that these features could be more effective with a better method of linking menu items to mentions in review text.</p>
 <h3 id="analysis">Analysis</h3>
-<p>We also inspected the feature weights of our learned models. By comparing the weights of related features, we can see the relative differences in terms of contribution to menu item prices. Table [tab:indiv-feats] shows example feature weights, manually arranged into several categories (taken from the model with <span class="textsc">MenuNames</span> + <span class="textsc">MenuDesc</span> + \(\widehat{\mathrm{PR}}\) + <span class="textsc">Metadata</span>).</p>
-<p>Table [tab:indiv-feats](a) shows selected features for the <q>ambience</q> field in the Yelp restaurant metadata and pane (b) lists some unigrams related to cooking methods. Pane (c) shows feature weights for \(n\)-grams often used to market menu items; we see larger weights for words targeting those who want to eat organically- or locally-grown food (<em>farmhouse</em>, <em>heirloom</em>, <em>wild</em>, and <em>hormone</em>), compared to those looking for comfort food (<em>old time favorite</em>, <em>traditional</em>, <em>real</em>, and <em>fashioned</em>). This is related to observations made by <span class="citation">(Freedman and Jurafsky 2011)</span> that cheaper food is marketed by appealing to tradition and historicity, with more expensive food described in terms of naturalness, quality of ingredients, and the preparation process (e.g., <em>hand picked</em>, <em>wild caught</em>, etc.). Relatedly, in pane (e) we see that <em>real</em> mashed potatoes are expected to be cheaper than those described as <em>creamy</em> or <em>smooth</em>.</p>
+<p>We also inspected the feature weights of our learned models. By comparing the weights of related features, we can see the relative differences in terms of contribution to menu item prices. Table <a href="#indiv-feats">3</a> shows example feature weights, manually arranged into several categories (taken from the model with <span class="textsc">MenuNames</span> + <span class="textsc">MenuDesc</span> + \(\widehat{\mathrm{PR}}\) + <span class="textsc">Metadata</span>).</p>
+<p>Table <a href="#indiv-feats">3</a>(a) shows selected features for the <q>ambience</q> field in the Yelp restaurant metadata and pane (b) lists some unigrams related to cooking methods. Pane (c) shows feature weights for \(n\)-grams often used to market menu items; we see larger weights for words targeting those who want to eat organically- or locally-grown food (<em>farmhouse</em>, <em>heirloom</em>, <em>wild</em>, and <em>hormone</em>), compared to those looking for comfort food (<em>old time favorite</em>, <em>traditional</em>, <em>real</em>, and <em>fashioned</em>). This is related to observations made by <span class="citation">(Freedman and Jurafsky 2011)</span> that cheaper food is marketed by appealing to tradition and historicity, with more expensive food described in terms of naturalness, quality of ingredients, and the preparation process (e.g., <em>hand picked</em>, <em>wild caught</em>, etc.). Relatedly, in pane (e) we see that <em>real</em> mashed potatoes are expected to be cheaper than those described as <em>creamy</em> or <em>smooth</em>.</p>
 <p>Pane (d) shows feature weights for trigrams containing units of chicken; we can see an ordering in terms of size (<em>bits</em> \(&lt;\) <em>cubes</em> \(&lt;\) <em>strips</em> \(&lt;\) <em>cuts</em>) as well as the price increase associated with the use of the word <em>morsels</em> in place of less refined units. We also see a difference between <em>pieces</em> and <em>pcs</em>, with the latter being frequently used to refer to entire cuts of chicken (e.g., wings, thighs, etc.) and the former more often used as a synonym for <em>chunks</em>.</p>
 <p>Panes (f), (g), and (h) reveal price differences due to slight variations in word form. We find that, even though <em>crispy</em> has a higher weight than <em>crisp</em>, <em>crisp bacon</em> is more expensive than <em>crispy bacon</em>. We also find that food items prefixed with <em>roast</em> lead to more expensive prices than the similar <em>roasted</em>, except in the case of <em>pork</em>, though here the different forms may be evoking two different preparation styles.</p>
 <p>Also of note is the slight difference between the nonstandard <em>mash potato</em> and <em>mashed potato</em>. We observed lower weights with other nonstandard spellings, notably <em>portobella</em> having lower weight than each of the more common spellings <em>portabella</em>, <em>portobello</em>, and <em>portabello</em>.</p>
 <figure id="indiv-feats">
-<table><tr><td></td></tr></table>
+<div>
+<div>
+<h4>(a) <span class="textsc">Metadata</span>:<br/>ambience</h4>
+<dl style="width: 10em">
+<dt>dive-y   </dt><dd>-0.015</dd>
+<dt>intimate </dt><dd>-0.013</dd>
+<dt>trendy   </dt><dd>-0.012</dd>
+<dt>casual   </dt><dd>-0.005</dd>
+<dt>romantic </dt><dd>-0.004</dd>
+<dt>classy   </dt><dd>-7e-6 </dd>
+<dt>touristy </dt><dd> 0.058</dd>
+<dt>upscale  </dt><dd> 0.099</dd>
+</dl>
+<h4>(b) <span class="textsc">MenuDesc</span>:<br/>cooking</h4>
+<dl style="width: 10em">
+<dt>panfried    </dt><dd>-0.094 </dd>
+<dt>chargrilled </dt><dd>-0.029 </dd>
+<dt>cooked      </dt><dd>-0.012 </dd>
+<dt>boiled      </dt><dd>-0.006 </dd>
+<dt>fried       </dt><dd>-0.005 </dd>
+<dt>steamed     </dt><dd> 0.011 </dd>
+<dt>charbroiled </dt><dd> 0.015 </dd>
+<dt>grilled     </dt><dd> 0.022 </dd>
+<dt>simmered    </dt><dd> 0.025 </dd>
+<dt>roasted     </dt><dd> 0.034 </dd>
+<dt>sauteed     </dt><dd> 0.034 </dd>
+<dt>broiled     </dt><dd> 0.053 </dd>
+<dt>seared      </dt><dd> 0.066 </dd>
+<dt>braised     </dt><dd> 0.068 </dd>
+<dt>stirfried   </dt><dd> 0.071 </dd>
+<dt>flamebroiled </dt><dd> 0.106</dd>
+</dl>
+</div>
+<div>
+<h4>(c) <span class="textsc">MenuDesc</span>:<br/>descriptors</h4>
+<dl style="width: 12em">
+<dt>old time favorite </dt><dd>-0.112</dd>
+<dt>fashioned </dt><dd>-0.034</dd>
+<dt>line caught </dt><dd>-0.028</dd>
+<dt>all natural </dt><dd>-0.028</dd>
+<dt>traditional </dt><dd>-0.009</dd>
+<dt>natural </dt><dd>3e-4</dd>
+<dt>classic </dt><dd>0.002</dd>
+<dt>free range </dt><dd>0.004</dd>
+<dt>real </dt><dd>0.004</dd>
+<dt>fresh </dt><dd>0.006</dd>
+<dt>homemade </dt><dd>0.010</dd>
+<dt>authentic </dt><dd>0.012</dd>
+<dt>organic </dt><dd>0.020</dd>
+<dt>specialty </dt><dd>0.025</dd>
+<dt>special </dt><dd>0.033</dd>
+<dt>locally </dt><dd>0.037</dd>
+<dt>natural grass fed </dt><dd>0.038</dd>
+<dt>artisanal </dt><dd>0.064</dd>
+<dt>raised </dt><dd>0.066</dd>
+<dt>heirloom </dt><dd>0.083</dd>
+<dt>wild </dt><dd>0.084</dd>
+<dt>hormone </dt><dd>0.085</dd>
+<dt>farmed </dt><dd>0.099</dd>
+<dt>hand picked </dt><dd>0.101</dd>
+<dt>wild caught </dt><dd>0.116</dd>
+<dt>farmhouse </dt><dd>0.133</dd>
+</dl>
+</div>
+<div>
+<h4>(d) <span class="textsc">MenuDesc</span>:<br/>_ = <em>of chicken</em></h4>
+<dl style="width: 8em">
+<dt>slices _</dt><dd>-0.102 </dd>
+<dt>bits _</dt><dd>-0.032</dd>
+<dt>cubes _</dt><dd>-0.030</dd>
+<dt>pieces _</dt><dd>-0.024 </dd>
+<dt>strips _</dt><dd>-0.001 </dd>
+<dt>chunks _</dt><dd>0.015</dd>
+<dt>morsels _</dt><dd>0.025 </dd>
+<dt>pcs _</dt><dd>0.040</dd>
+<dt>cuts _</dt><dd>0.042</dd>
+</dl>
+<h4>(g) <span class="textsc">MenuDesc</span>:<br/><em>crisp</em> vs. <em>crispy</em></h4>
+<dl style="width: 12em">
+<dt>crisp</dt><dd>-0.022</dd>
+<dt>crispy</dt><dd>-0.011</dd>
+<dt>crispy bacon</dt><dd>0.008</dd>
+<dt>crisp bacon</dt><dd>0.033</dd>
+</dl>
+</div>
+<div>
+<h4>(e) <span class="textsc">MenuDesc</span>:<br/>_ = <em>potatoes</em></h4>
+<dl style="width: 12em">
+<dt>real mashed _</dt><dd>-0.028</dd>
+<dt>mashed _</dt><dd>-0.005</dd>
+<dt>creamy mashed _</dt><dd>-5e-9</dd>
+<dt>smashed _</dt><dd>0.018</dd>
+<dt>smooth mashed _</dt><dd>0.129</dd>
+</dl>
+<h4>(f) <span class="textsc">MenuDesc</span>:<br/>_ = <em>potato</em></h4>
+<dl style="width: 12em">
+<dt>mash _</dt><dd>-0.022</dd>
+<dt> mashed</dt><dd>-0.019</dd>
+</dl>
+<h4>(f) <span class="textsc">MenuDesc</span>:<br/><em>roast</em> vs. <em>roasted</em></h4>
+<dl style="width: 12em">
+<dt>roasted</dt><dd> 0.034</dd>
+<dt>roast</dt><dd> 0.040</dd>
+<dt>roasted potatoes</dt><dd>0.026</dd>
+<dt>roast potatoes</dt><dd>0.110</dd>
+<dt>roasted chicken</dt><dd>-0.041</dd>
+<dt>roast chicken</dt><dd>-0.012</dd>
+<dt>roasted salmon</dt><dd>0.091</dd>
+<dt>roast salmon</dt><dd>0.151</dd>
+<dt>roast pork</dt><dd>-0.038</dd>
+<dt>roasted pork</dt><dd>0.055</dd>
+<dt>roasted tomato</dt><dd>0.010</dd>
+<dt>roast tomato</dt><dd>0.026</dd>
+</dl>
+</div>
+</div>
 <figcaption>Selected features from model for menu item price prediction. See text for details.</figcaption>
 </figure>
 </section>
@@ -204,7 +320,7 @@
 <p>We compared this simple approach with an ordinal regression model <span class="citation">(McCullagh 1980)</span> trained with the same \(\ell_1\) regularizer and noted very little improvement (77.32% vs. 77.15% accuracy for <span class="textsc">Metadata</span>). Therefore, we only report in this section results for the linear regression model.</p>
 <p>In addition to the feature sets used for individual menu item price prediction, we used features on reviews (<span class="textsc">Reviews</span>). Specifically, we used binary features for unigrams, bigrams, and trigrams in the full set of reviews for each restaurant. A stopword list was derived from the training data.<sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup> Bigrams and trigrams were filtered if they ended with stopwords. Additionally, features occurring fewer than three times in the training set were discarded.</p>
 <h3 id="results-1">Results</h3>
-<p>Our results for price range prediction are shown in Table [tab:price-range-pred-results]. Predicting the most frequent price range gave us an accuracy of 48.22%. Performance improvements were obtained by separately adding menu (<span class="textsc">Menu*</span>), metadata (<span class="textsc">Metadata</span>), and review features (<span class="textsc">Reviews</span>). Unlike individual item price prediction, the reviews were more helpful than the menu features for predicting overall price range. This is not surprising, since reviewers will often generally discuss price in their reviews. We combined metadata and review features to get our best accuracy, exceeding 80%.</p>
+<p>Our results for price range prediction are shown in Table <a href="#price-range-pred-results">4</a>. Predicting the most frequent price range gave us an accuracy of 48.22%. Performance improvements were obtained by separately adding menu (<span class="textsc">Menu*</span>), metadata (<span class="textsc">Metadata</span>), and review features (<span class="textsc">Reviews</span>). Unlike individual item price prediction, the reviews were more helpful than the menu features for predicting overall price range. This is not surprising, since reviewers will often generally discuss price in their reviews. We combined metadata and review features to get our best accuracy, exceeding 80%.</p>
 <p>We also wanted to perform an analysis of sentiment in the review text. To do this, we trained a logistic regression model predicting polarity for each review; we used the <span class="textsc">Reviews</span> feature set, but this time considering each review as a single training instance. The polarity of a review was determined by whether or not its star rating was greater than the average rating across all reviews in the dataset (3.7 stars). We achieved an accuracy of 87% on the test data. We omit full details of these models because the polarity prediction task for user reviews is well-known in the sentiment analysis community and our model is not an innovation over prior work <span class="citation">(Pang and Lee 2008)</span>. However, our purpose in training the model was to use the learned weights for understanding the text in the reviews.</p>
 <figure id="price-range-pred-results">
 <table>
@@ -258,10 +374,11 @@
 <figcaption>Results for restaurant price range prediction. MAE = mean absolute error, Acc = classification accuracy (%), nf = total number of features, nnz = number of features with non-zero weight.</figcaption>
 </figure>
 <h3 id="interpreting-reviews">Interpreting Reviews</h3>
-<p>Given learned models for predicting a restaurant’s price range from its set of reviews as well as polarity for each review, we can turn the process around and use the feature weights to analyze the review text. Restricting our attention to reviews of 50–60 words, Table [tab:reviews] shows sample reviews from our test set that lead to various predictions of price range and sentiment.<sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup></p>
+<p>Given learned models for predicting a restaurant’s price range from its set of reviews as well as polarity for each review, we can turn the process around and use the feature weights to analyze the review text. Restricting our attention to reviews of 50–60 words, Table <a href="#reviews">5</a> shows sample reviews from our test set that lead to various predictions of price range and sentiment.<sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup></p>
 <p>This technique can also be useful when trying to determine the <q>true</q> star rating for a review (if provided star ratings are noisy), or to show the most positive and most negative reviews for a product within a particular star rating. The 5-point scale is merely a coarse approximation to the reviewer’s mental state; using fitted models can provide additional clues to decode the reviewer’s sentiment.</p>
 <figure id="reviews">
-<table><tr><th></th><th>← cheap</th><th></th><th style="text-align: right">expensive →</th></tr>
+<table style="font-size:90%">
+<tr><th></th><th>← cheap</th><th></th><th style="text-align: right">expensive →</th></tr>
 <tr><th style="text-align: center">\(\uparrow\)<br>\(\oplus\)</th>
 <td>i love me a cheap vietnamese sandwich . mmm , pate . this place has the best ones i ’ve had in the city , and i conveniently live a few blocks away . the ladies behind the counter are always courteous and fast , and who can beat a $ 3 sandwich ?! crazy ass deli .</td>
 <td>this place is tiny ! the pork buns are so tender and flavorful . i dream about these things . manila clams were awesome , not the biggest clam fan either , but i loved it . mmm 7 spice chips . i ca n’t wait to go back !</td>
@@ -276,7 +393,7 @@
 </table>
 <figcaption>Reviews from the test set deemed by our model to have particular values of sentiment and price.</figcaption>
 </figure>
-<p>We can also do a more fine-grained analysis of review text by noting the contribution to the price range prediction of each position in the text stream. This is straightforward because our features are simply \(n\)-grams of the review text. In Figure [fig:sentence-bars], we show the influence of each word in a review sentence on the predicted polarity (brown) and price range (yellow). The height of a bar at a given position is proportional to the sum of the feature weights for every unigram, bigram, and trigram containing the token at that position (there are at most 6 active \(n\)-grams at a position).</p>
+<p>We can also do a more fine-grained analysis of review text by noting the contribution to the price range prediction of each position in the text stream. This is straightforward because our features are simply \(n\)-grams of the review text. In Figure <a href="#sentence-bars">2</a>, we show the influence of each word in a review sentence on the predicted polarity (brown) and price range (yellow). The height of a bar at a given position is proportional to the sum of the feature weights for every unigram, bigram, and trigram containing the token at that position (there are at most 6 active \(n\)-grams at a position).</p>
 <figure id="sentence-bars">
 <div class="figure">
 </div>
@@ -293,7 +410,7 @@
 <p>\[\begin{aligned}
 \boldsymbol{w}_\$ = (\boldsymbol{w}_{\uparrow \oplus} + \boldsymbol{w}_{\uparrow \ominus}) - (\boldsymbol{w}_{\downarrow \oplus} + \boldsymbol{w}_{\downarrow \ominus}) \\
 \boldsymbol{w}_\bigstar = (\boldsymbol{w}_{\uparrow \oplus} + \boldsymbol{w}_{\downarrow \oplus}) - (\boldsymbol{w}_{\uparrow \ominus} + \boldsymbol{w}_{\downarrow \ominus})\end{aligned}\]</p>
-<p>We then select for display the features which are the furthest from the origin (\(\max w_\$^2+w_\bigstar^2\)) and represent the selected \(n\)-grams as points in the sentiment/price space to obtain Figure [fig:joint].</p>
+<p>We then select for display the features which are the furthest from the origin (\(\max w_\$^2+w_\bigstar^2\)) and represent the selected \(n\)-grams as points in the sentiment/price space to obtain Figure <a href="#joint">3</a>.</p>
 <figure id="joint">
 <div class="figure">
 </div>

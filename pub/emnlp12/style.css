@@ -25,6 +25,17 @@ article {
     counter-reset: section figure table;
 }
 
+section p {
+    text-indent: 1em;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+section p:nth-child(2) {
+    text-indent: 0
+}
+
 h1 {
     margin: 0;
     text-align: center;
@@ -56,17 +67,29 @@ h4 {
     margin: 0;
 }
 
+figure {
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    font-size: 90%;
+}
+
 figure table {
     margin: auto;
+}
+
+table td {
+    vertical-align: top;
+    padding: 0 0.2em;
+    line-height: 1.2em;
 }
 
 figcaption {
     margin-top: 1em;
     text-align: center;
-    font-size: 90%;
 }
 
-table ~ figcaption:before {
+table ~ figcaption:before, 
+#indiv-feats figcaption:before  {
     counter-increment: table;
     content: "Table " counter(table) ": ";
 }
@@ -76,16 +99,12 @@ table ~ figcaption:before {
     content: "Figure " counter(figure) ": ";
 }
 
-td {
-    padding: 0 0.2em;
-}
-
 #authors {
     margin: 0em 2em 2em;
     text-align: center;
 }
 
-#authors span {
+#authors a {
     line-height: 2em;
     font-weight: bold;
     margin-left: 3em;
@@ -101,13 +120,26 @@ td {
     text-align: center;
 }
 
-section p {
-    text-indent: 1em;
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    hyphens: auto;
+#indiv-feats div {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 0.5em;
 }
 
-section p:nth-child(2) {
-    text-indent: 0
+#indiv-feats dl {
+    margin: 0;
+}
+
+#indiv-feats dt {
+    float: left;
+}
+
+#indiv-feats dd {
+    text-align:right;
+}
+
+#indiv-feats h4 {
+    float: none;
+    margin: 0 auto;
+    text-align: center;
 }
