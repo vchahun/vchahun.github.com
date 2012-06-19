@@ -191,6 +191,11 @@ span.courses {
     a {
         color: #444;
     }
+
+    h1 {
+        text-shadow: none;
+    }
+
     nav {
         display: none;
     }
