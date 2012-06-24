@@ -42,11 +42,11 @@
 </section>
 <section id="data">
 <h2>Data</h2>
-<p>We crawled <a href="www.allmenus.com">Allmenus.com</a> to gather menus for restaurants in seven U.S. cities: Boston, Chicago, Los Angeles, New York, Philadelphia, San Francisco, and Washington, D.C. Each menu includes a list of item names with optional text descriptions and prices. Most Allmenus restaurant pages contain a link to the corresponding page on <a href="www.yelp.com">Yelp</a> with metadata and user reviews for the restaurant, which we also collected.</p>
+<p>We crawled <a href="http://www.allmenus.com">Allmenus.com</a> to gather menus for restaurants in seven U.S. cities: Boston, Chicago, Los Angeles, New York, Philadelphia, San Francisco, and Washington, D.C. Each menu includes a list of item names with optional text descriptions and prices. Most Allmenus restaurant pages contain a link to the corresponding page on <a href="http://www.yelp.com">Yelp</a> with metadata and user reviews for the restaurant, which we also collected.</p>
 <p>The metadata consist of many fields for each restaurant, which can be divided into three categories: location (city, neighborhood, transit stop), services available (take-out, delivery, wifi, parking, etc.), and ambience (good for groups, noise level, attire, etc.). Also, the category of food and a price range (<span class="tex2jax_ignore">$ to $$$$</span>, indicating the price of a typical meal at the restaurant) are indicated. The user reviews include a star rating on a scale of 1 to 5.</p>
 <p>The distribution of prices of individual menu items is highly skewed, with a mean of $9.22 but a median of $6.95. On average, a restaurant has 73 items on its menu with a median price of $8.69 and 119 Yelp reviews with a median rating of 3.55 stars. The star rating and price range distributions are shown in <a href="#global-stats">Figure 1</a>.</p>
 <figure id="global-stats">
-<div class="figure">
+<div class="figure tex2jax_ignore">
 <div id="pricerange-graph"></div>
 <div id="stars-graph"></div>
 <script src="global-stats.js"></script>
@@ -462,9 +462,9 @@
 <section id="footnotes">
 <ol>
 <li id="fn1"><p>The price distribution is more symmetric in the log domain.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>This list can be found in the supplementary material.<a href="#fnref2">↩</a></p></li>
+<li id="fn2"><p>This list can be found in the <a href="supplementary.pdf">supplementary material</a>.<a href="#fnref2">↩</a></p></li>
 <li id="fn3"><p>The normalized item names are present as binary features in all of our regression models.<a href="#fnref3">↩</a></p></li>
-<li id="fn4"><p>This list is included in the supplementary material.<a href="#fnref4">↩</a></p></li>
+<li id="fn4"><p>This list is included in the <a href="supplementary.pdf">supplementary material</a>.<a href="#fnref4">↩</a></p></li>
 <li id="fn5"><p>To choose the 9 reviews in the table, we took the reviews from our test set in the desired length range and computed predicted sentiment and price range for each; then we scaled the predicted price range so that its range matched that of predicted sentiment, and maximized various linear combinations of the two. This accounts for the four corners. The others were found by maximizing a linear combination of one (possibly negated) prediction minus the absolute value of the other.<a href="#fnref5">↩</a></p></li>
 <li id="fn6"><p>Price and sentiment are both endogenous outcomes reflecting the characteristics of the restaurant. E.g., <q>better</q> restaurants can charge higher prices.<a href="#fnref6">↩</a></p></li>
 </ol>
