@@ -81,7 +81,7 @@
 <p>We consider several prediction tasks using the dataset just described. These include predicting <strong>individual menu item prices</strong> (<a href="#item-price-pred">§5</a>), predicting the <strong>price range</strong> for each restaurant (<a href="#price-range-pred">§6</a>), and finally jointly predicting <strong>median price and sentiment</strong> for each restaurant (<a href="#joint-pred">§7</a>). To do this, we use two types of models: linear regression (<a href="#item-price-pred">§5</a> and <a href="#price-range-pred">§6</a>) and logistic regression (<a href="#joint-pred">§7</a>), both with \(\ell_1\) regularization when sparsity is desirable. We tune the regularization coefficient by choosing the value that minimizes development set loss (mean squared error and log loss, respectively).</p>
 <p>For evaluation, we use mean absolute error (<abbr>MAE</abbr>) and mean relative error (<abbr>MRE</abbr>). Given a dataset \(\langle \boldsymbol{x}_i, y_i\rangle_{i=1}^N\) with inputs \(\boldsymbol{x}_i\) and outputs \(y_i\), and denoting predicted outputs by \(\hat{y}_i\), these are defined as follows:</p>
 <p>\[\begin{aligned}
-\mathrm{MAE} &amp; = \frac{1}{N} \sum_{i=1}^N |y_i - \hat{y}_i|\\
+\mathrm{MAE} &amp; = \frac{1}{N} \sum_{i=1}^N \left|y_i - \hat{y}_i\right|\\
 \mathrm{MRE} &amp; = \frac{1}{N} \sum_{i=1}^N \left|\frac{y_i - \hat{y}_i}{y_i}\right|\end{aligned}\]</p>
 <p>In practice, since we model log-prices but evaluate on real prices, the final prediction is often a non-linear transformation of the output of the linear classifier of weight vector \(\boldsymbol{w}\), which we denote by: \(\hat{y}_i = f(\boldsymbol{w}^\top \boldsymbol{x}_i)\).</p>
 <p>We also frequently report the total number of features available in the training set for each model (<abbr>nf</abbr>) as well as the number of non-zero feature weights following learning (<abbr>nnz</abbr>).</p>
@@ -136,7 +136,7 @@
 <td style="text-align: right;">240,139</td>
 </tr>
 <tr>
-<th style="text-align: left;"><span class="textsc">MenuNames</span</th>
+<th style="text-align: left;"><span class="textsc">Metadata</span</th>
 <td style="text-align: center;">3.55</td>
 <td style="text-align: center;">43.11</td>
 <td style="text-align: right;">268,450</td>
@@ -430,7 +430,7 @@
 </section>
 <section id="acknowledgments">
 <h2>Acknowledgments</h2>
-<p>We thank Julie Baron, Ric Crabbe, David Garvett, Laura Gimpel, Chenxi Jiao, Elaine Lee, members of the ARK research group, and the anonymous reviewers for helpful comments that improved this paper. This research was supported in part by the NSF through CAREER grant IIS-1054319 and Sandia National Laboratories (fellowship to K. Gimpel).</p>
+<p>We thank Julie Baron, Ric Crabbe, David Garvett, Laura Gimpel, Chenxi Jiao, Elaine Lee, members of the <a href="http://www.ark.cs.cmu.edu">ARK research group</a>, and the anonymous reviewers for helpful comments that improved this paper. This research was supported in part by the NSF through CAREER grant IIS-1054319 and Sandia National Laboratories (fellowship to K. Gimpel).</p>
 </section>
 <footer>
 <section id="references">
