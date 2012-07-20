@@ -6,12 +6,21 @@ body {
 }
 
 a {
-    color: #c41;
     text-decoration: none;
+    color: #28D;
+}
+
+li {
+    list-style-type: none;
 }
 
 h3 {
     margin: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
 }
 
 div.content {
@@ -41,6 +50,10 @@ h1 {
     text-shadow: white 0px 1px 0, #555 0 -1px 0
 }
 
+#home a, #resume a {
+    color: #c41;
+}
+
 #home h2 {
     width: 300px;
     vertical-align: bottom;
@@ -56,28 +69,18 @@ nav {
     right: 20px;
 }
 
-nav ul, nav li {
-    margin: 0;
-    padding: 0;
+nav li {
     display: inline-block;
 }
 
 nav a {
-    color: #28D;
+    color: #28D !important;
 }
 
 #research {
     position: absolute;
     top: 20px;
     left: 340px;
-}
-
-#research li {
-    list-style-type: none;
-}
-
-#research ul {
-    padding: 0;
 }
 
 #home #email {
@@ -87,17 +90,20 @@ nav a {
     font: 90% Monaco, Consolas, monospace;
 }
 
-#publications ul {
-    padding-left: 0;
-}
-
 #publications li {
-    list-style-type: none;
     line-height: 1.25em;
 }
 
-#publications li a:nth-child(1) {
-    color: #28D;
+.content span.addinfo {
+    font-size: 80%;
+}
+
+.content span.addinfo a {
+    color: #c41;
+}
+
+#software li {
+    padding: 0.5em 0;
 }
 
 /* Resume */
@@ -115,14 +121,6 @@ nav a {
 	display: inline-block;
 	width: 200px;
     font-size: 100%;
-}
-
-#resume ul {
-	padding: 0
-}
-
-#resume li {
-	list-style-type: none;
 }
 
 span.location {
