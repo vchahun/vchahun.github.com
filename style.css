@@ -92,6 +92,7 @@ nav a {
 
 #publications li {
     line-height: 1.25em;
+    margin-bottom: 1.25em;
 }
 
 .content span.addinfo {
