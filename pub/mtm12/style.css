@@ -1,0 +1,128 @@
+body {
+    font: 110% Palatino, Times, serif;
+    line-height: 1.4em;
+    text-align: justify;
+    background: #aaa;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #700;
+}
+
+article {
+    width: 860px;
+    margin: auto;
+    background: white;
+    padding: 0 50px;
+    box-shadow: 0 0 10px black;
+    height: 100%;
+    counter-reset: section figure table;
+}
+
+section p {
+    text-indent: 1em;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+section p:nth-child(2) {
+    text-indent: 0
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+    line-height: 5em;
+}
+
+h2 {
+    counter-reset: subsection;
+}
+
+h2:before {
+    counter-increment: section;
+    content: counter(section) ". ";
+}
+
+h3:before {
+    counter-increment: subsection;
+    content: counter(section) "." counter(subsection) ". ";
+}
+
+#acknowledgments h2:before,
+#conclusion h2:before,
+#references h2:before {
+    content: "";
+}
+
+h4 {
+    float: left;
+    margin: 0;
+}
+
+figure {
+    text-align: center;
+    margin: 1em 0;
+    font-size: 90%;
+}
+
+figcaption {
+    margin-top: 1em;
+    text-align: center;
+}
+
+
+#authors {
+    margin: 0em 2em 2em;
+    text-align: center;
+}
+
+#authors a {
+    line-height: 2em;
+    font-weight: bold;
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+#abstract {
+    font-size: 90%;
+    padding: 0 5em;
+}
+
+#abstract h2 {
+    text-align: center;
+}
+
+#MathJax_Message {
+    display: none;
+}
+
+#chart {
+    border-collapse: collapse;
+    margin: auto;
+    font: 90% Helvetica, sans-serif;
+}
+
+#chart td {
+    text-align: center;
+    width: 3em; 
+    height: 3em; 
+    color: white;
+    padding: 5px;
+}
+
+#chart, #chart tr, #chart td {
+    border:none
+}
+
+pre {
+    font: 90% Incosolata, Consolas, Monaco, monospace;
+    line-height: 1.5em;
+}
+
+code {
+    font: 90% Incosolata, Consolas, Monaco, monospace;
+}

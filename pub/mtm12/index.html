@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf8">
+<title>pycdec: A Python Interface to cdec</title>
+<script src="/pub/mathjax/MathJax.js?config=TeX-AMS_HTML"></script>
+<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="pygments.css"/>
+</head>
+<body>
+<article>
+<header>
+<h1><code>pycdec</code>: A Python Interface to <code>cdec</code></h1>
+<section id="authors">
+<a href="/">Victor Chahuneau</a>
+<a href="http://cs.cmu.edu/~nasmith">Noah A. Smith</a>
+<a href="http://cs.cmu.edu/~cdyer">Chris Dyer</a>
+</section>
+</header>
+<section id="abstract">
+<p>This paper describes <code>pycdec</code>, a Python module for the <code>cdec</code> decoder. It enables Python code to use <code>cdec</code>’s fast C++ implementation of core finite-state and context-free inference algorithms for decoding and alignment. The high-level interface allows developers to build integrated MT applications that take advantage of the rich Python ecosystem without sacrificing computational performance. We give examples of how to interact directly with the main <code>cdec</code> data structures (lattices, hypergraphs, sparse feature vectors), evaluate translation quality, and use the suffix-array grammar extraction code. This permits rapid prototyping of new algorithms for training, data visualization, and utilizing MT and related structured prediction tasks.</p>
+</section>
+<section id="introduction">
+<h2>Introduction</h2>
+<p>Machine translation decoders are complex pieces of software. They must provide efficient search and inference algorithms, represent large translation grammars (e.g., phrase tables), and support scoring of hypotheses with a variety of feature functions. Typically, they also contain functionality for parameter learning and translation quality evaluation. Despite this sophistication, machine translation can be formalized quite well using familiar, well-defined mathematical objects (e.g., lattices, vectors, hypergraphs, weighted finite-state transducers) and in terms of just a few algorithms (e.g., FST/CFG intersection, shortest path search, etc.).</p>
+<p>Although this convenient and precise mathematical language exists (and is, of course, used in the academic literature), the programmatic interfaces to real translation systems are much more complicated. On one hand, the low-level implementation in the decoder’s native language (usually C++ or Java) is highly optimized, making the mapping between the mathematical primitives discussed in papers and the actual code difficult to perceive. On the other hand, the high-level command-line interface that decoders expose is not suitably expressive for anything but the most coarse automation. As a result, when new researchers and engineers master the theory of MT, they must still invest a great deal of work in learning a real software system before they can really innovate. This paper describes a new Python interface for the <code>cdec</code> decoder designed to narrow the gap between theory and practice.</p>
+<p><code>cdec</code> is a good candidate for this task because it has been designed with modularity in mind from the beginning (<span class="citation">Dyer et al. 2010</span>). We choose Python as the language to expose the API for its large user base and rich extension ecosystem, and also because it is an interpreted language supporting both object-oriented and functional programming. The goals for this project include:</p>
+<ul>
+<li>exposing the decoder functionality as a library with a natural, easy-to-understand interface;</li>
+<li>providing access to the decoder’s data structures, including translation hypergraphs, input lattices, hypothesis feature vectors, etc.;</li>
+<li>allowing direct integration of external Python libraries such as <em>NLTK</em> (<span class="citation">Bird et al. 2009</span>) and <em>scikit-learn</em> (<span class="citation">Pedregosa et al. 2011</span>) into machine translation systems; and</li>
+<li>encouraging creative use of machine translation technology by programmers who do not need to learn the details of open-source machine translation systems.</li>
+</ul>
+<p>The <code>pycdec</code> interface is implemented using Cython (<span class="citation">Behnel et al. 2011</span>) and included as part of the open-source <a href="http://cdec-decoder.org"><code>cdec</code> distribution</a>. In the following, we give an introduction to its main functionality and then describe a few applications of the new interface.</p>
+</section>
+<section id="related-work">
+<h2>Related Work</h2>
+<p>Experiment management tools (<span class="citation">Koehn 2010</span>; <span class="citation">Clark et al. 2010</span>) abstract the internals of the decoder from the user to provide a uniform interface to the main training steps of the system. While these facilitate the coordination of large experimental setups, they must be configured using either a domain-specific language or a graphical interface that the user has to learn to manipulate the system. We go in the opposite direction and directly expose the decoder to the user in a modern and familiar language, Python.</p>
+<p>Recent work has also explored the use of visualization tools for machine translation. <span class="citation">Weese and Callison-Burch (2010)</span> describe extensions to the Joshua decoder to populate a graphical interface used to display derivation trees and hypergraphs. We obtain similar functionality with just a couple of lines of <code>pycdec</code> in conjunction with existing visualization tools (<a href="#vis">§ 4.1</a>). Since our visualizations are computed with simple Python scripts, developers have far more flexibility to innovate.</p> <p>Finally, the popularity of web translation services such as Google Translate has motivated the development of web interfaces for open-source translation tools (<span class="citation">Federmann and Eisele 2010</span>). We demonstrate how such tools can be rapidly developed using common networking and communication libraries (<a href="#web">§ 4.2</a>).</p>
+</section>
+<section id="library-description">
+<h2>Library Description</h2>
+<p>The API of <code>pycdec</code> exposes the main data structures and algorithms necessary for machine translation and similar structured prediction problems. When it makes sense to do so, we retain the structure of the C++ interface, but otherwise follow the Python conventions.</p>
+<section id="api">
+<h3>Basic Translation and Inference API</h3>
+<p>The translation interface is provided by the <code>Decoder</code> class. The constructor takes arguments specifying the configuration of the decoder. Feature weights used by the decoder can be assigned and modified at any time (for example, in an online training algorithm).</p>
+<p>Once the decoder is instantiated, it can <code>translate</code> sentences, with an optional sentence-specific grammar passed as a string argument. The result returned is a translation hypergraph encoding the search space explored by the decoder.</p>
+<p>The <code>Hypergraph</code> object is central to this system, and therefore it supports several types of operations:</p>
+<ul>
+<li>extraction of the Viterbi translation (<code>viterbi</code>), source and target trees (<code>viterbi_trees</code>) and of the corresponding feature vector (<code>viterbi_features</code>);</li>
+<li>extraction of k-best translations (<code>kbest</code>), source and target trees (<code>kbest_trees</code>) and of the corresponding feature vectors (<code>kbest_features</code>);</li>
+<li>operations that modify the hypergraph, including:
+<ul>
+<li>rescoring with new weights (<code>reweight</code>),</li>
+<li>inside-outside pruning (<code>prune</code>),</li>
+<li>intersection with a reference sentence or lattice (<code>intersect</code>); and</li>
+</ul></li>
+<li>iteration over the <code>edges</code> and <code>nodes</code> that form the hypergraph.</li>
+</ul>
+<p>As an example, here is how to use a hierarchical phrase-based decoder to translate a sentence with a grammar read from a file:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">cdec</span>
+<span class="c"># Create and configure a decoder object</span>
+<span class="n">decoder</span> <span class="o">=</span> <span class="n">cdec</span><span class="o">.</span><span class="n">Decoder</span><span class="p">(</span><span class="n">formalism</span><span class="o">=</span><span class="s">&#39;scfg&#39;</span><span class="p">,</span>
+        <span class="n">feature_function</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;WordPenalty&#39;</span><span class="p">,</span> <span class="s">&#39;KLanguageModel lm.klm&#39;</span><span class="p">],</span>
+        <span class="n">add_pass_through_rules</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c"># Set weights for the language model features</span>
+<span class="n">decoder</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="s">&#39;LanguageModel_OOV&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">decoder</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="s">&#39;LanguageModel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="c"># Read a SCFG from a file</span>
+<span class="n">grammar</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;grammar.scfg&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c"># Translate the sentence; returns a translation hypergraph</span>
+<span class="n">hg</span> <span class="o">=</span> <span class="n">decoder</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s">&#39;traduttore , traditore .&#39;</span><span class="p">,</span> <span class="n">grammar</span><span class="o">=</span><span class="n">grammar</span><span class="p">)</span>
+<span class="c"># Extract the best hypothesis from the hypergraph</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hg</span><span class="o">.</span><span class="n">viterbi</span><span class="p">())</span>
+</pre></div>
+<p>Other formalisms such as phrase-based translation can be accessed in a similar way by setting the appropriate configuration parameters for the decoder.</p>
+</section>
+<section id="sa-extract">
+<h3>Grammar Extraction API</h3>
+<p>To minimize memory usage and code complexity, <code>cdec</code> uses <em>per-sentence grammars</em> (i.e., grammars containing just the rules that can match the words in a single test sentence). While these grammars can be constructed from arbitrary tools, <code>pycdec</code> provides access to the suffix array grammar extractor of <span class="citation">Lopez (2007)</span>, which uses an efficient compiled representation of a parallel corpus and word alignment to construct translation grammars on demand for new test sentences. The Python module makes this online grammar extraction procedure particularly simple.</p>
+<p>After the training corpus has been compiled into a suffix array representation using the tools distributed with <code>cdec</code>, the resulting configuration can be used to call the grammar extractor for any arbitrary input:</p>
+<div class="highlight"><pre><span class="n">extractor</span> <span class="o">=</span> <span class="n">cdec</span><span class="o">.</span><span class="n">sa</span><span class="o">.</span><span class="n">GrammarExtractor</span><span class="p">(</span><span class="s">&#39;extractor_config.py&#39;</span><span class="p">)</span>
+<span class="n">decoder</span> <span class="o">=</span> <span class="n">cdec</span><span class="o">.</span><span class="n">Decoder</span><span class="p">(</span><span class="n">formalism</span><span class="o">=</span><span class="s">&#39;scfg&#39;</span><span class="p">)</span>
+<span class="n">sentence</span> <span class="o">=</span> <span class="s">&#39;traduttore , traditore .&#39;</span>
+<span class="n">decoder</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">grammar</span><span class="o">=</span><span class="n">extractor</span><span class="o">.</span><span class="n">grammar</span><span class="p">(</span><span class="n">sentence</span><span class="p">))</span>
+</pre></div>
+<p>The extraction algorithm is implemented in Cython and reasonably fast for online extraction of grammars from very large corpora (<span class="citation">Lopez 2008</span>).</p>
+</section>
+<section id="metrics">
+<h3>Translation Quality Evaluation</h3>
+<p><code>cdec</code> includes implementations of basic evaluation metrics (BLEU and TER), exposed in Python via the <code>cdec.score</code> module. For a given (reference, hypothesis) pair, sufficient statistics vectors (<code>SufficientStats</code>) can be computed. These vectors are then added together for all sentences in the corpus and the final result is finally converted into a real-valued <code>score</code>.</p>
+<p>Writing a script which computes the BLEU score for a set of hypotheses and references is thus straightforward:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">cdec.score</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;hyp.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">hyp</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;ref.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ref</span><span class="p">:</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">cdec</span><span class="o">.</span><span class="n">score</span><span class="o">.</span><span class="n">BLEU</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">hyp</span><span class="p">,</span> <span class="n">ref</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;BLEU = {0:.1f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">score</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</pre></div>
+<p>When implementing training algorithms using <code>pycdec</code> (<a href="#training">§ 4.3</a>), it is often necessary to manipulate \(k\)-best lists of scored hypotheses. For every metric, sentence scorers are able produce such sets of hypotheses (<code>CandidateSet</code>). For each <code>Candidate</code> in the list, its sentence-level metric score (<code>score</code>), feature vector (<code>fmap</code>) and output string (<code>words</code>) can be obtained.</p>
+</section>
+</section>
+<section id="applications">
+<h2>Applications</h2>
+<p>In this section, we provide several examples using the <code>pycdec</code> module to solve visualization, parameter estimation, and grammar extraction problems.</p>
+<section id="vis">
+<h3>Visualizing the Result of Decoding</h3>
+<figure id="trees">
+<img src="source_tree.svg" alt="Source tree" style="width:500px"/>
+<img src="target_tree.svg" alt="Target tree"/>
+<figcaption>Figure 1: Source (Chinese) and target (English) parse trees, drawn using NLTK</figcaption>
+</figure>
+<p>We can make use of the functionality of <em>NLTK</em> to visualize derivation trees that result from the decoding of a sentence under a synchronous grammar. <a href="#trees">Fig. 1</a> shows an example for a Chinese/English hierarchical phrase-based system. The corresponding Python code is:</p>
+<div class="highlight"><pre><span class="n">hg</span> <span class="o">=</span> <span class="n">decoder</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+<span class="n">f_tree</span><span class="p">,</span> <span class="n">e_tree</span> <span class="o">=</span> <span class="n">hg</span><span class="o">.</span><span class="n">viterbi_trees</span><span class="p">()</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">Tree</span><span class="p">(</span><span class="n">f_tree</span><span class="p">)</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span> <span class="c"># draw source tree</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">Tree</span><span class="p">(</span><span class="n">e_tree</span><span class="p">)</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span> <span class="c"># draw target tree</span>
+</pre></div>
+<p>Another finite-state formalism supported by <code>cdec</code> is compound splitting, in which case the model output takes the form of a lattice (encoded as a hypergraph produced by the <code>translate</code> method). Conversion to the Graphviz dot format (<span class="citation">Ellson et al. 2003</span>) allows a compact visualization of the output space. Then we can use any of the several Python interfaces to Graphviz to directly render the lattice as shown below:</p>
+<div class="highlight"><pre>
+<span class="n">hg</span> <span class="o">=</span> <span class="n">decoder</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s">&#39;tonbandaufnahme&#39;</span><span class="p">)</span>
+<span class="n">hg</span><span class="o">.</span><span class="n">prune</span><span class="p">(</span><span class="n">beam_alpha</span><span class="o">=</span><span class="mf">9.0</span><span class="p">,</span> <span class="n">csplit_preserve_full_word</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">pydot</span><span class="o">.</span><span class="n">graph_from_dot_data</span><span class="p">(</span><span class="n">hg</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span><span class="o">.</span><span class="n">todot</span><span class="p">())</span><span class="o">.</span><span class="n">write_svg</span><span class="p">(</span><span class="s">&#39;lattice.svg&#39;</span><span class="p">)</span>
+</pre></div>
+<figure id="lattice">
+<img src="lattice.svg" alt="Compound splitting lattice" style="width: 600px"/>
+</figure>
+<p>Finally, we introduce a more complex visualization which makes use of the direct access to the hypergraph (<a href="#marginals">Fig. 3</a>). For the same sentence as our first example, we represent the synchronous parse chart as a table, with each cell containing all the possible non-terminals for the corresponding span. Then we color the background of the cell according to the following value:</p>
+<p>\[\log \sum_{node \in nodes} \max_{edge \rightarrow node} p(edge)\]</p>
+<p>This gives an indication of how much uncertainty is present at each level of the parse. We believe that this is an efficient method to compactly visualize the enormous output space produced by the decoder: the hypergraph contains \(244,232\) edges and \(77\) nodes encoding a total of \(3.8 \times 10^{28}\) paths!</p>
+<figure id="marginals">
+<table id="chart"> <tbody><tr> <td style="background-color:rgb(-80, 100, 335)">[澳洲]<br>X/S</td> <td style="background-color:rgb(-74, 100, 329)">X/S</td> <td style="background-color:rgb(-69, 100, 324)">X/S</td> <td style="background-color:rgb(-69, 100, 324)">X/S</td> <td style="background-color:rgb(-69, 100, 324)">X/S</td> <td style="background-color:rgb(-69, 100, 324)">X/S</td> <td style="background-color:rgb(-69, 100, 324)">X/S</td> <td style="background-color:rgb(-69, 100, 324)">X/S</td> <td style="background-color:rgb(-69, 100, 324)">X/S</td> <td style="background-color:rgb(-69, 100, 324)">X/S</td> <td style="background-color:rgb(-119, 100, 374)">S/Goal</td> </tr> <tr> <td style="background-color:none"></td> <td style="background-color:rgb(71, 100, 184)">[是]<br>X</td> <td style="background-color:rgb(118, 100, 137)">X</td> <td style="background-color:rgb(118, 100, 137)">X</td> <td style="background-color:rgb(118, 100, 137)">X</td> <td style="background-color:rgb(118, 100, 137)">X</td> <td style="background-color:rgb(118, 100, 137)">X</td> <td style="background-color:rgb(118, 100, 137)">X</td> <td style="background-color:rgb(104, 100, 151)">X</td> <td style="background-color:rgb(118, 100, 137)">X</td> <td style="background-color:rgb(6, 100, 249)">X</td> </tr> <tr> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:rgb(98, 100, 157)">[与]<br>X</td> <td style="background-color:rgb(145, 100, 110)">X</td> <td style="background-color:rgb(145, 100, 110)">X</td> <td style="background-color:rgb(145, 100, 110)">X</td> <td style="background-color:rgb(145, 100, 110)">X</td> <td style="background-color:rgb(145, 100, 110)">X</td> <td style="background-color:rgb(104, 100, 151)">X</td> <td style="background-color:rgb(145, 100, 110)">X</td> <td style="background-color:rgb(6, 100, 249)">X</td> </tr> <tr> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:rgb(134, 100, 121)">[北韩]<br>X</td> <td style="background-color:rgb(174, 100, 81)">X</td> <td style="background-color:rgb(174, 100, 81)">X</td> <td style="background-color:rgb(162, 100, 93)">X</td> <td style="background-color:rgb(174, 100, 81)">X</td> <td style="background-color:rgb(104, 100, 151)">X</td> <td style="background-color:rgb(160, 100, 95)">X</td> <td style="background-color:rgb(6, 100, 249)">X</td> </tr> <tr> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:rgb(201, 100, 54)">[有]<br>X</td> <td style="background-color:rgb(240, 100, 15)">X</td> <td style="background-color:rgb(162, 100, 93)">X</td> <td style="background-color:rgb(176, 100, 79)">X</td> <td style="background-color:rgb(104, 100, 151)">X</td> <td style="background-color:rgb(160, 100, 95)">X</td> <td style="background-color:rgb(6, 100, 249)">X</td> </tr> <tr> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:rgb(198, 100, 57)">[邦交]<br>X</td> <td style="background-color:rgb(162, 100, 93)">X</td> <td style="background-color:rgb(176, 100, 79)">X</td> <td style="background-color:rgb(104, 100, 151)">X</td> <td style="background-color:rgb(160, 100, 95)">X</td> <td style="background-color:rgb(6, 100, 249)">X</td> </tr> <tr> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:rgb(46, 100, 209)">[的]<br>X</td> <td style="background-color:rgb(119, 100, 136)">X</td> <td style="background-color:rgb(104, 100, 151)">X</td> <td style="background-color:rgb(119, 100, 136)">X</td> <td style="background-color:rgb(6, 100, 249)">X</td> </tr> <tr> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:rgb(113, 100, 142)">[少数]<br>X</td> <td style="background-color:rgb(104, 100, 151)">X</td> <td style="background-color:rgb(160, 100, 95)">X</td> <td style="background-color:rgb(6, 100, 249)">X</td> </tr> <tr> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:rgb(70, 100, 185)">[国家]<br>X</td> <td style="background-color:rgb(141, 100, 114)">X</td> <td style="background-color:rgb(6, 100, 249)">X</td> </tr> <tr> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:rgb(135, 100, 120)">[之一]<br>X</td> <td style="background-color:rgb(6, 100, 249)">X</td> </tr> <tr> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:none"></td> <td style="background-color:rgb(-40, 100, 295)">[。]<br>X</td> </tr> </tbody></table>
+<figcaption>Figure 2. Chart for the synchronous parse of a Chinese sentence</figcaption>
+</figure>
+<p>We conclude by noting that, as opposed to specialized visualization tools (e.g., <span class="citation">Weese and Callison-Burch 2010</span>), <code>pycdec</code> allows the programmer to use any algorithm and output format to explore the various decoder data structures. We suggest in particular the use of the IPython notebook (<span class="citation">Pérez and Granger 2007</span>) to produce HTML or SVG graphics directly in a web browser, as we did for <a href="#marginals">Fig. 3</a>.</p>
+</section>
+<section id="web">
+<h3>A Web Translation Interface</h3>
+<figure id="translator">
+<img src="translator.svg" alt="A web translation interface" style="width: 700px"/>
+<figcaption>Figure 3. Architecture of the web translation service</figcaption>
+</figure>
+<p>Commercial web translation platforms, such as Google Translate, have been very successful in bringing state of the art machine translation systems to internet users. In a research environment, it can also be useful to provide similar web interfaces, for example, for non-technical users to explore the strength and weaknesses of the system.</p>
+<p>Since <code>pycdec</code> provides an access to the decoder directly from Python, it is possible to implement such a service with standard networking libraries to manage communication. <a href="#translator">Fig. 3</a> illustrates the messages transmitted between the three layers of the architecture as a piece of text is translated:</p>
+<ul>
+<li>The user interface consists of a HTML page with a JavaScript UI interacting with the web server via asynchronous HTTP requests.</li>
+<li>When the web server – a Python application implemented using the <em>flask</em> web framework – receives a translation request, it applies standard pre-processing steps to the input. The text is first segmented into sentences, and each sentence is in turn tokenized. We rely on <em>NLTK</em> for this step, at least when the source language is English. Then, each sentence is sent separately through a <a href="http://www.zeromq.org">ZeroMQ</a> socket to the translation server, using the <em>pyzmq</em> library.</li>
+<li>The translation server receives individual sentences, for which it extracts grammars on the fly as explained in <a href="#sa-extract">§ 3.2</a>, before calling the decoder to translate the sentence with the extracted grammar. It replies to the web server with the translated sentence.</li>
+<li>The web server then post-processes each translated sentence and recomposes the translated text block before transmitting it back to the web UI.</li>
+</ul>
+<p>Even with such a minimal architecture, our system can easily be scaled by multiplying the number of translation servers and relying on ZeroMQ to distribute translation tasks to the multiple decoder instances.</p>
+</section>
+<section id="training">
+<h3>Parameter Estimation</h3>
+<p>Another natural use case for <code>pycdec</code> is to facilitate development of new discriminative parameter learning algorithms in Python. Such algorithms (e.g., <span class="citation">Chiang et al. 2008</span>; <span class="citation">Hopkins and May 2011</span>; <span class="citation">Gimpel and Smith 2012</span>) use the decoder to compute statistics over the hypergraphs or \(k\)-best lists produced by decoding a development set so as to optimize some objective function (like BLEU, or likelihood). In these algorithms, the majority of the computational effort is the decoding step (or a similar inference problem, such as computing posterior probabilities over \(n\)-grams), whereas the manipulation of the weight vector is inexpensive. Thus, a natural division of labor is to use Python’s mathematical libraries for manipulation of the weight vector and <code>pycdec</code> for inference.</p>
+<p>Advantages of writing a new training method with <code>pycdec</code> include the possibility to easily debug code by directly interacting with the decoder data structures through the Python interpreter, and the availability of mature machine learning libraries such as <em>scikit-learn</em>.</p>
+<p>To illustrate these claims, we implement a recently published training method that is not currently included in <code>cdec</code>. We choose <span class="citation">Bazrafshan et al. (2012)</span>, a simple extension to PRO (<span class="citation">Hopkins and May 2011</span>) which uses linear regression instead of a binary classifier to rank sampled training pairs (briefly: the model is trained to predict the difference in sentence level BLEU scores based on a difference in feature vectors). The complete Python code is given below:</p>
+<div class="highlight"><pre><span class="n">decoder</span> <span class="o">=</span> <span class="n">cdec</span><span class="o">.</span><span class="n">Decoder</span><span class="p">(</span><span class="n">...</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_pairs</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">reference</span><span class="p">):</span>
+    <span class="n">hg</span> <span class="o">=</span> <span class="n">decoder</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="c"># 1. Generate a list containing the k best translations</span>
+    <span class="n">cs</span> <span class="o">=</span> <span class="n">cdec</span><span class="o">.</span><span class="n">score</span><span class="o">.</span><span class="n">BLEU</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span><span class="o">.</span><span class="n">candidate_set</span><span class="p">()</span>
+    <span class="n">cs</span><span class="o">.</span><span class="n">add_kbest</span><span class="p">(</span><span class="n">hg</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="c"># 2. Use the uniform distribution to sample n random pairs</span>
+    <span class="c"># from the set of candidate translations</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
+        <span class="n">ci</span> <span class="o">=</span> <span class="n">cs</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">cj</span> <span class="o">=</span> <span class="n">cs</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="c"># 3. Keep a pair of candidates if the difference between their score</span>
+        <span class="c"># is bigger than a threshold t</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ci</span><span class="o">.</span><span class="n">score</span> <span class="o">-</span> <span class="n">cj</span><span class="o">.</span><span class="n">score</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">score_threshold</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ci</span><span class="o">.</span><span class="n">fmap</span> <span class="o">-</span> <span class="n">cj</span><span class="o">.</span><span class="n">fmap</span><span class="p">,</span> <span class="n">ci</span><span class="o">.</span><span class="n">score</span> <span class="o">-</span> <span class="n">cj</span><span class="o">.</span><span class="n">score</span><span class="p">))</span>
+    <span class="c"># 4. From the potential pairs kept in the previous step,</span>
+    <span class="c"># keep the s pairs that have the highest score</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">heapq</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">,</span> <span class="n">pairs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">xy</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">])):</span>
+        <span class="c"># 5. For each pair kept in step 4, make two data points</span>
+        <span class="k">yield</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+        <span class="k">yield</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">y</span>
+
+<span class="c"># The DictVectorizer converts dictionaries into sparse vectors</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">feature_extraction</span><span class="o">.</span><span class="n">DictVectorizer</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iterations</span><span class="p">):</span>
+    <span class="c"># Collect training pairs</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">source</span><span class="p">,</span> <span class="n">reference</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span> <span class="n">references</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">get_pairs</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">reference</span><span class="p">):</span>
+            <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="c"># Train a linear regression model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+    <span class="c"># Update weights with the learned model</span>
+    <span class="k">for</span> <span class="n">fname</span><span class="p">,</span> <span class="n">fval</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">feature_names_</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">):</span>
+        <span class="n">decoder</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">fname</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">fval</span> <span class="o">+</span>
+                <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">decoder</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">fname</span><span class="p">])</span>
+</pre></div>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion</h2>
+<p>We have presented <code>pycdec</code>, a high-level Python interface to the fast <code>cdec</code> decoder. We illustrated how such an interface allows effortless development of visualizations, training algorithms and applications using machine translation. We hope that the release of our tool will encourage further creative uses of finite-state and context-free methods for machine translation and related applications.</p>
+</section>
+<section id="acknowledgments">
+<h2>Acknowledgments</h2>
+<p>This research is supported by the U. S. Army Research Laboratory and the U. S. Army Research Office under contract/grant number W911NF-10-1-0533.</p>
+</section>
+<footer>
+<section id="references">
+<h2>References</h2>
+<p>Bazrafshan, M., T. Chung, and D. Gildea. 2012. “Tuning as Linear Regression.” In <em>Proc. of NAACL-HLT</em>, 543–547.</p>
+<p>Behnel, S., R. Bradshaw, C. Citro, L. Dalcin, D. S. Seljebotn, and K. Smith. 2011. “Cython: The Best of Both Worlds.” <em>Computing in Science Engineering</em> 13 (March–April): 31–39.</p>
+<p>Bird, S., E. Klein, and E. Loper. 2009. <em>Natural language processing with Python</em>. O’Reilly Media. <a href="http://nltk.org" title="http://nltk.org">http://nltk.org</a>.</p>
+<p>Chiang, D., Y. Marton, and P. Resnik. 2008. “Online large-margin training of syntactic and structural translation features.” In <em>Proceedings of the Conference on Empirical Methods in Natural Language Processing</em>, 224–233.</p>
+<p>Clark, J. H., J. Weese, B. G. Ahn, A. Zollmann, Q. Gao, K. Heafield, and A. Lavie. 2010. “The machine translation toolpack for LoonyBin: Automated management of experimental machine translation hyperworkflows.” <em>The Prague Bulletin of Mathematical Linguistics</em> 93: 117–126.</p>
+<p>Dyer, C., J. Weese, H. Setiawan, A. Lopez, F. Ture, V. Eidelman, J. Ganitkevitch, P. Blunsom, and P. Resnik. 2010. “cdec: A decoder, alignment, and learning framework for finite-state and context-free translation models.” In <em>Proc. of the ACL (Demonstration track</em>, 7–12.</p>
+<p>Ellson, J., E. R. Gansner, E. Koutsofios, S. C. North, and G. Woodhull. 2003. “Graphviz and Dynagraph – Static and Dynamic Graph Drawing Tools.” In <em>Graph Drawing Software</em>, ed. M. Junger and P. Mutzel, 127–148. Springer-Verlag. <a href="http://graphviz.org" title="http://graphviz.org">http://graphviz.org</a>.</p>
+<p>Federmann, C., and A. Eisele. 2010. “MT Server Land: An Open-Source MT Architecture.” <em>The Prague Bulletin of Mathematical Linguistics</em> 94: 57–66.</p>
+<p>Gimpel, K., and N. A. Smith. 2012. “Structured ramp loss minimization for machine translation.” In <em>Proceedings of NAACL</em>.</p>
+<p>Hopkins, M., and J. May. 2011. “Tuning as ranking.” In <em>Proc. of EMNLP</em>, 1352–1362.</p>
+<p>Koehn, P. 2010. “An Experimental Management System.” <em>The Prague Bulletin of Mathematical Linguistics</em> 94: 87–96.</p>
+<p>Lopez, A. 2007. “Hierarchical phrase-based translation with suffix arrays.” In <em>Proc. of EMNLP-CoNLL</em>, 976–985.</p>
+<p>Lopez, A. 2008. “Tera-scale translation models via pattern matching.” In <em>Proc. COLING</em>, 505–512.</p>
+<p>Pedregosa, F., G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, et al. 2011. “Scikit-learn: Machine Learning in Python.” <em>Journal of Machine Learning Research</em> 12: 2825–2830. <a href="http://scikit-learn.org" title="http://scikit-learn.org">http://scikit-learn.org</a>.</p>
+<p>Pérez, F., and B. E. Granger. 2007. “IPython: a System for Interactive Scientific Computing.” <em>Comput. Sci. Eng.</em> 9: 21–29. <a href="http://ipython.org" title="http://ipython.org">http://ipython.org</a>.</p>
+<p>Weese, J., and C. Callison-Burch. 2010. “Visualizing data structures in parsing-based machine translation.” <em>The Prague Bulletin of Mathematical Linguistics</em> 93: 127–136.</p>
+</section>
+</footer>
+</article>
+</body>
+</html>
