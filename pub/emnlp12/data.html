@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+    <title>Word Salad data</title>
+    <link rel="stylesheet" href="/style.css"/>
+    <style>
+        ul li {
+            list-style-type: square;
+            margin-left: 1.5em;
+            line-height: 2em;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+<h1>Word Salad — data</h1>
+<p><a href="/pub/emnlp12">Word Salad: Relating Food Prices and Descriptions</a><br/>
+<span class="authors">Victor Chahuneau, Kevin Gimpel, Bryan R. Routledge, Lily Scherlis, and Noah A. Smith</span>
+</p>
+</div>
+<div class="content">
+<p>The restaurant menus dataset is divided into three parts for running the experiments:</p>
+<ul>
+<li>Training data = 7,401 restaurants / 733,360 items: <a href="http://www.ark.cs.cmu.edu/vchahune/menus/train.json.gz">train.json.gz</a></li>
+<li>Development data = 934 restaurants / 90,917 items: <a href="http://www.ark.cs.cmu.edu/vchahune/menus/dev.json.gz">dev.json.gz</a></li>
+<li>Evaluation data = 944 restaurants / 91,697 items: <a href="http://www.ark.cs.cmu.edu/vchahune/menus/test.json.gz">test.json.gz</a></li>
+</ul>
+<p><a href="https://github.com/vchahun/word-salad">Python code</a> to train a baseline model is available on Github.</p>
+</div>
+<div class="content">
+<p>The files contain one <abbr>JSON</abbr> map per line, representing a restaurant menu, with the following schema:</p>
+<pre><code>
+{
+    "id": &lt;int&gt;, 
+    "name": &lt;string&gt;,
+    "city": &lt;str&gt;,
+    "address": &lt;str&gt;,
+    "neighborhoods": [&lt;str&gt;],
+    "categories": [&lt;str&gt;],
+    "avg_rating": &lt;float&gt;,
+    "latitude": &lt;float&gt;,
+    "longitude": &lt;float&gt;,
+    "info": {&lt;str&gt;: &lt;str&gt;},
+    "items": {
+        "name": &lt;str&gt;,
+        "description": &lt;str&gt;,
+        "price": &lt;float&gt;
+    }
+}
+</code></pre>
+</div>
+</body>
+</html>
