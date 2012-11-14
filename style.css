@@ -136,6 +136,10 @@ span.courses {
 	font-size: 70%;
 }
 
+#resume span.conference {
+    line-height: 2em;
+}
+
 @media screen and (max-width:960px) {
     div#home, div#publications {
         width: 700px;
