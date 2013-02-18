@@ -162,7 +162,7 @@ span.courses {
         margin: 0 auto;
     }
 
-    div#home, div#publications {
+    div#home, div#publications, div#software {
         width: 300px;
         padding: 10px;
     }
