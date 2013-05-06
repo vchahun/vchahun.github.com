@@ -1,0 +1,8 @@
+Pandoc
+------
+
+- \newcite, \shortcite
+- \textsc
+- \input
+- references -> replace by links
+- figure captions not transfered
