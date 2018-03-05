@@ -10,37 +10,11 @@ a {
     color: #28D;
 }
 
-li {
-    list-style-type: none;
-}
-
-h3 {
-    margin: 0;
-}
-
-ul {
-    margin: 0;
-    padding: 0;
-}
-
 div.content {
     width: 920px;
     padding: 20px;
     margin: 20px auto;
     background: white;
-    position:  relative;
-}
-
-#id {
-    width: 300px;
-    margin-right: 20px;
-    display: inline-block;
-}
-
-#photo {
-    width: 300px;
-    height: 300px;
-    margin-bottom: 20px;
 }
 
 h1 {
@@ -50,168 +24,22 @@ h1 {
     text-shadow: white 0px 1px 0, #555 0 -1px 0
 }
 
-#home a, #resume a {
+#email a {
     color: #c41;
 }
 
-#home h2 {
-    width: 300px;
-    vertical-align: bottom;
-    font-size: 115%;
-    font-weight: normal;
-    margin: 0;
-    display: inline-block;
-}
-
-nav {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-nav li {
-    display: inline-block;
-}
-
-nav a {
-    color: #28D !important;
-}
-
-#research {
-    position: absolute;
-    top: 20px;
-    left: 340px;
-}
-
-#home #email {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+#email {
     font: 90% Monaco, Consolas, monospace;
 }
 
-#publications li {
-    line-height: 1.25em;
-    margin-bottom: 1.25em;
-}
-
-.content span.addinfo {
-    font-size: 80%;
-}
-
-.content span.addinfo a {
-    color: #c41;
-}
-
-#software li {
-    padding: 0.5em 0;
-}
-
-/* Resume */
-
-#printinfo {
-    float: right;
-    display: none; /* for print */
-}
-
-#resume h2 {
-    clear: both
-}
-
-#resume h3 {
-	display: inline-block;
-	width: 200px;
-    font-size: 100%;
-}
-
-span.location {
-	font-style: italic;
-}
-
-p.description {
-	padding-left: 200px;
-}
-
-span.courses {
-	font-size: 70%;
-}
-
-#resume span.conference {
-    line-height: 2em;
-}
-
 @media screen and (max-width:960px) {
-    div#home, div#publications {
+    div#home {
         width: 700px;
-    }
-
-    #home #email {
-        bottom: 25px;
-        left: 340px;
-    }
-
-    #home h2 {
-        position: absolute;
-        bottom: 60px;
-        left: 340px;
     }
 }
 
 @media screen and (max-width:760px) {
     div#home {
-        margin: 0 auto;
-    }
-
-    div#home, div#publications, div#software {
         width: 300px;
-        padding: 10px;
-    }
-
-    div#id {
-        margin: 0;
-    }
-
-    #home #email, #home nav, #home #research, #home h2 {
-        position: static;
-    }
-
-    #home h3 {
-        margin: 1em 0;
-    }
-
-    #home nav {
-        border-top: 1px solid #f3f3f3;
-        padding-top: 10px;
-    }
-}
-
-@media print {
-    body {
-        background: white;
-        color: black;
-    }
-
-    a {
-        color: #444;
-    }
-
-    h1 {
-        text-shadow: none;
-    }
-
-    nav {
-        display: none;
-    }
-
-    #printinfo {
-        display: block;
-    }
-
-    span.courses {
-        display: none
-    }
-
-    #resume p {
-        margin-top: 0.5em;
     }
 }
